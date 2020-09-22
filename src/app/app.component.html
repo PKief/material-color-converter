@@ -1,12 +1,14 @@
-<mat-card
-  ><div class="color-input">
-    <form [formGroup]="colorForm" (ngSubmit)="convert()">
-      <mat-form-field appearance="fill">
-        <mat-label>Input</mat-label>
-        <input matInput formControlName="color" />
-      </mat-form-field>
-      <button mat-button type="submit">Convert</button>
-    </form>
-    <p>Result: {{ resultColor }}</p>
-  </div>
-</mat-card>
+<div class="container">
+  <mat-card class="color-card"
+    ><div class="color-input">
+      <form [formGroup]="colorForm" (ngSubmit)="convert()">
+        <mat-form-field appearance="fill">
+          <mat-label>Input</mat-label>
+          <input matInput formControlName="color" />
+        </mat-form-field>
+        <button mat-button type="submit">Convert</button>
+      </form>
+      <p>Result: {{ resultColor }}</p>
+    </div>
+  </mat-card>
+</div>
