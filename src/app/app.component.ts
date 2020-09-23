@@ -52,8 +52,6 @@ export class AppComponent implements OnInit {
   validateCssColor(
     color: FormControl
   ): null | { validateCssColor: { valid: boolean } } {
-    const hexPattern = new RegExp(/^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/);
-    console.log(chroma.valid(color.value), color.value);
     return chroma.valid(color.value)
       ? null
       : {
