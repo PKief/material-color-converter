@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as chroma from 'chroma-js';
 import { materialColors } from './colors';
 
@@ -11,41 +11,55 @@ import { materialColors } from './colors';
 export class AppComponent implements OnInit {
   title = 'material-color-converter';
   colorForm: FormGroup;
-  resultColor: string;
+  resultColor: { hex: string; rgb: string; hsl: string };
+
+  @ViewChild('container') container: ElementRef;
 
   ngOnInit(): void {
     this.colorForm = new FormGroup({
-      color: new FormControl(),
+      color: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(6),
+        Validators.minLength(3),
+        this.validateCssColor,
+      ]),
     });
   }
 
   convert(): void {
     const { color } = this.colorForm.value;
-    // TODO: implement custom form validator
-    if (this.validateHEXColorCode(color)) {
-      const distances = materialColors
-        .map((matColor) => {
-          return {
-            distance: chroma.distance(matColor, color),
-            color: matColor,
-          };
-        })
-        .sort((a, b) => a.distance - b.distance);
+    const distances = materialColors
+      .map((matColor) => {
+        return {
+          distance: chroma.distance(matColor, color),
+          color: matColor,
+        };
+      })
+      .sort((a, b) => a.distance - b.distance);
 
-      const result = distances[0];
-      this.resultColor = result.color;
-    } else {
-      alert('wrong color code. Must be HEX with prefixed # sign');
-      this.resultColor = '';
-    }
+    const result = distances[0];
+    this.resultColor = {
+      hex: result.color,
+      rgb: chroma(result.color).css(),
+      hsl: chroma(result.color).css('hsl'),
+    };
+    this.container.nativeElement.style.backgroundColor = result.color;
   }
 
   /**
-   * Validate the HEX color code
-   * @param color HEX code
+   * Validate the color code
    */
-  validateHEXColorCode(color: string): boolean {
-    const hexPattern = new RegExp(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/);
-    return color.length > 0 && hexPattern.test(color);
+  validateCssColor(
+    color: FormControl
+  ): null | { validateCssColor: { valid: boolean } } {
+    const hexPattern = new RegExp(/^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/);
+    console.log(chroma.valid(color.value), color.value);
+    return chroma.valid(color.value)
+      ? null
+      : {
+          validateCssColor: {
+            valid: false,
+          },
+        };
   }
 }
