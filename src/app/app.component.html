@@ -1,42 +1,43 @@
 <div class="container" #container>
-  <mat-card class="color-card"
-    ><div class="color-input">
-      <form [formGroup]="colorForm" (ngSubmit)="convert()">
-        <mat-form-field>
-          <mat-label>CSS Color</mat-label>
-          <input matInput formControlName="color" required />
-          <button
-            mat-icon-button
-            matSuffix
-            type="submit"
-            [disabled]="colorForm.invalid"
+  <div>
+    <mat-card class="color-card"
+      ><div class="color-input">
+        <form [formGroup]="colorForm" (keyup)="convert()">
+          <mat-form-field>
+            <mat-label>CSS Color</mat-label>
+            <input matInput formControlName="color" required />
+            <mat-error *ngIf="colorForm.get('color').hasError('required')"
+              >Please enter a color!</mat-error
+            >
+            <mat-error
+              *ngIf="
+                colorForm.get('color').value.length > 0 && colorForm.invalid
+              "
+              >Color is invalid!</mat-error
+            >
+            <input
+              type="color"
+              matSuffix
+              [value]="getColorFormValue()"
+              (change)="changeColorPicker($event)"
+            />
+          </mat-form-field>
+        </form>
+        <ol class="result-list">
+          <li
+            class="result-item"
+            *ngFor="let color of resultColors; let i = index"
           >
-            <mat-icon>chevron_right</mat-icon>
-          </button>
-          <mat-error *ngIf="colorForm.get('color').hasError('required')"
-            >Please enter a color!</mat-error
-          >
-          <mat-error
-            *ngIf="colorForm.get('color').value.length > 0 && colorForm.invalid"
-            >Color is invalid!</mat-error
-          >
-        </mat-form-field>
-      </form>
-      <p><b>Your Material Color is:</b></p>
-      <table>
-        <tr>
-          <td>HEX:</td>
-          <td>{{ resultColor?.hex }}</td>
-        </tr>
-        <tr>
-          <td>RGB:</td>
-          <td>{{ resultColor?.rgb }}</td>
-        </tr>
-        <tr>
-          <td>HSL:</td>
-          <td>{{ resultColor?.hsl }}</td>
-        </tr>
-      </table>
-    </div>
-  </mat-card>
+            <div
+              class="color-preview"
+              [style.backgroundColor]="color.hex"
+            ></div>
+            <div>
+              {{ color.hex }}
+            </div>
+          </li>
+        </ol>
+      </div>
+    </mat-card>
+  </div>
 </div>

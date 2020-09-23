@@ -4,9 +4,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all ease 1s;
 }
 
-table {
-  table-layout: auto;
-  width: 100%;
+ol.result-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li.result-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .color-preview {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 5px;
+    margin-right: 1rem;
+  }
 }
