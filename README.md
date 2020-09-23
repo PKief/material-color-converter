@@ -1,4 +1,8 @@
-# MaterialColorConverter
+# Material Color Converter
+
+Convert any CSS color to a similar color of the Material Design.
+
+---
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.2.
 
