@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -7,6 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as chroma from 'chroma-js';
 import { materialColors } from './colors';
 
@@ -21,7 +21,7 @@ interface ResultColor {
   styleUrls: ['./app.component.scss'],
   animations: [],
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
   title = 'material-color-converter';
   colorForm: FormGroup;
   suggestedColors: ResultColor[] = [];
@@ -30,44 +30,70 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   @ViewChild('container') container: ElementRef;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    const randomStartColor =
-      materialColors[Math.floor(Math.random() * materialColors.length)];
-    this.colorForm = new FormGroup({
-      color: new FormControl(randomStartColor.hex, [
-        Validators.required,
-        this.validateCssColor,
-      ]),
+    this.route.queryParams.subscribe((params) => {
+      // either use a random color or value of query param
+      const randomStartColor = params.color
+        ? { hex: params.color }
+        : materialColors[Math.floor(Math.random() * materialColors.length)];
+      this.colorForm = new FormGroup({
+        color: new FormControl(randomStartColor.hex, [
+          Validators.required,
+          this.validateCssColor,
+        ]),
+      });
+      this.selectedColor = randomStartColor.hex;
+      this.convert();
     });
-    this.selectedColor = randomStartColor.hex;
+
+    // store color value as query param in URL
+    this.colorForm.valueChanges.subscribe((value) => {
+      const queryParams: Params = { color: value.color };
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams,
+        queryParamsHandling: 'merge',
+      });
+    });
 
     this.generateColorPalette();
   }
 
+  /**
+   * Generate the color palette to show all colors of the Material Design Color Palette
+   */
   generateColorPalette(): void {
+    // group colors by category (e.g. red or orange)
     const colorMap = materialColors.reduce((result, color, i) => {
       (result[color.category] = result[color.category] || []).push(color);
       return result;
     }, {});
 
+    // create two dimensional array for each category
     this.colorPalette = Object.keys(colorMap).reduce((result, key, i) => {
       result.push(colorMap[key]);
       return result;
     }, []);
   }
 
-  ngAfterViewInit(): void {
-    this.convert();
-  }
-
-  changeColorPicker(event): void {
+  /**
+   * If a color has been entered via the color picker store the value also in the input element
+   */
+  onChangeColorPicker(event): void {
     const color = event.srcElement.value;
     this.colorForm.get('color').setValue(color);
     this.convert();
   }
 
+  /**
+   * Convert the given color to a color of the Material Design color palette
+   */
   convert(): void {
     if (this.colorForm.invalid) {
       return;
@@ -83,6 +109,8 @@ export class AppComponent implements OnInit, AfterViewInit {
       .sort((a, b) => a.distance - b.distance);
 
     this.suggestedColors = [];
+
+    // pick five colors with the lowest distance to the input color
     distances.slice(0, 5).forEach((distance) => {
       const suggestedColor = distance.color;
       this.suggestedColors.push({
@@ -95,10 +123,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.generateColorPalette();
   }
 
-  selectSuggestedColor(color: string): void {
-    this.selectedColor = color;
-  }
-
+  /**
+   * Update background of the container with the color which was entered by the user
+   */
   updateBackground(inputColor: string): void {
     this.container.nativeElement.style.backgroundColor = chroma(
       inputColor
@@ -120,10 +147,13 @@ export class AppComponent implements OnInit, AfterViewInit {
         };
   }
 
+  /**
+   * Get color value of the form for the color picker
+   */
   getColorFormValue(): string {
     const color = this.colorForm.get('color').value;
     if (chroma.valid(color)) {
-      return chroma(this.colorForm.get('color').value).hex();
+      return chroma(color).hex();
     }
   }
 }

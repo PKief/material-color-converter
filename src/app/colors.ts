@@ -2,7 +2,6 @@ export interface Color {
   category: string;
   hue?: string;
   hex: string;
-  suggested?: boolean;
 }
 
 export const materialColors: Color[] = [

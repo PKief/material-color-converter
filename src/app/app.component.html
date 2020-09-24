@@ -23,7 +23,7 @@
               type="color"
               matSuffix
               [value]="getColorFormValue()"
-              (change)="changeColorPicker($event)"
+              (change)="onChangeColorPicker($event)"
             />
           </mat-form-field>
         </form>
@@ -41,7 +41,7 @@
           <li
             class="result-item"
             *ngFor="let color of suggestedColors; let i = index"
-            (click)="selectSuggestedColor(color.hex)"
+            (click)="selectedColor = color.hex"
           >
             <div
               class="color-preview"
