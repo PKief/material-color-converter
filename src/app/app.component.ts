@@ -122,6 +122,8 @@ export class AppComponent implements OnInit {
     this.cdr.detectChanges();
     this.updateBackground(color);
     this.generateColorPalette();
+
+    this.selectedColor = this.suggestedColors[0].hex;
   }
 
   /**
