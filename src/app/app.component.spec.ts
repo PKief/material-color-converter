@@ -1,35 +1,53 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
 import { AppComponent } from './app.component';
+import { GithubCornerComponent } from './shared/github-corner/github-corner.component';
+import { ToHslPipe } from './shared/pipes/to-hsl.pipe';
+import { ToRgbPipe } from './shared/pipes/to-rgb.pipe';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
+  jest.mock('./colors', () => [{ category: 'red', hue: '50', hex: '#FFEBEE' }]);
+
   beforeEach(async () => {
+    const mockActivatedRoute = {
+      queryParams: of({
+        color: 'red',
+      }),
+    };
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
       ],
-      declarations: [
-        AppComponent
+      declarations: [AppComponent, ToHslPipe, ToRgbPipe, GithubCornerComponent],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          use: mockActivatedRoute,
+        },
       ],
     }).compileComponents();
   });
 
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+  });
+
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'material-color-converter'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('material-color-converter');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('material-color-converter app is running!');
+    expect(component).toBeTruthy();
   });
 });
