@@ -48,18 +48,19 @@ export class AppComponent implements OnInit {
           this.validateCssColor,
         ]),
       });
+
+      // store color value as query param in URL
+      this.colorForm.valueChanges.subscribe((value) => {
+        const queryParams: Params = { color: value.color };
+        console.log(queryParams);
+        this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams,
+        });
+      });
+
       this.selectedColor = randomStartColor.hex;
       this.convert();
-    });
-
-    // store color value as query param in URL
-    this.colorForm.valueChanges.subscribe((value) => {
-      const queryParams: Params = { color: value.color };
-      this.router.navigate([], {
-        relativeTo: this.route,
-        queryParams,
-        queryParamsHandling: 'merge',
-      });
     });
 
     this.generateColorPalette();
