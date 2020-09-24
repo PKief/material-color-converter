@@ -12,8 +12,6 @@ import { materialColors } from './colors';
 
 interface ResultColor {
   hex: string;
-  rgb: string;
-  hsl: string;
   distance: number;
 }
 
@@ -26,7 +24,9 @@ interface ResultColor {
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'material-color-converter';
   colorForm: FormGroup;
-  resultColors: ResultColor[] = [];
+  suggestedColors: ResultColor[] = [];
+  selectedColor = '#ffffff';
+  colorPalette: ResultColor[][];
 
   @ViewChild('container') container: ElementRef;
 
@@ -36,11 +36,26 @@ export class AppComponent implements OnInit, AfterViewInit {
     const randomStartColor =
       materialColors[Math.floor(Math.random() * materialColors.length)];
     this.colorForm = new FormGroup({
-      color: new FormControl(randomStartColor, [
+      color: new FormControl(randomStartColor.hex, [
         Validators.required,
         this.validateCssColor,
       ]),
     });
+    this.selectedColor = randomStartColor.hex;
+
+    this.generateColorPalette();
+  }
+
+  generateColorPalette(): void {
+    const colorMap = materialColors.reduce((result, color, i) => {
+      (result[color.category] = result[color.category] || []).push(color);
+      return result;
+    }, {});
+
+    this.colorPalette = Object.keys(colorMap).reduce((result, key, i) => {
+      result.push(colorMap[key]);
+      return result;
+    }, []);
   }
 
   ngAfterViewInit(): void {
@@ -61,27 +76,30 @@ export class AppComponent implements OnInit, AfterViewInit {
     const distances = materialColors
       .map((matColor) => {
         return {
-          distance: chroma.distance(matColor, color),
-          color: matColor,
+          distance: chroma.distance(matColor.hex, color),
+          color: matColor.hex,
         };
       })
       .sort((a, b) => a.distance - b.distance);
 
-    this.resultColors = [];
+    this.suggestedColors = [];
     distances.slice(0, 5).forEach((distance) => {
       const suggestedColor = distance.color;
-      this.resultColors.push({
+      this.suggestedColors.push({
         hex: suggestedColor,
-        rgb: chroma(suggestedColor).css(),
-        hsl: chroma(suggestedColor).css('hsl'),
         distance: distance.distance,
       });
     });
     this.cdr.detectChanges();
-    this.updateBackground(color, this.resultColors);
+    this.updateBackground(color);
+    this.generateColorPalette();
   }
 
-  updateBackground(inputColor: string, resultColors: ResultColor[]): void {
+  selectSuggestedColor(color: string): void {
+    this.selectedColor = color;
+  }
+
+  updateBackground(inputColor: string): void {
     this.container.nativeElement.style.backgroundColor = chroma(
       inputColor
     ).alpha(0.65);

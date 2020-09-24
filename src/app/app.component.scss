@@ -4,13 +4,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all ease 1s;
+  transition: background ease 1s;
+
+  @media screen and (max-width: 600px) {
+    display: block;
+  }
+}
+
+.color-input {
+  form {
+    mat-form-field {
+      width: 100%;
+    }
+  }
 }
 
 ol.result-list {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+
+  @media screen and (max-width: 600px) {
+    flex-wrap: wrap;
+  }
 
   li.result-item {
     display: flex;
@@ -21,7 +38,34 @@ ol.result-list {
   .color-preview {
     width: 3rem;
     height: 3rem;
-    border-radius: 5px;
     margin-right: 1rem;
+
+    &.selected {
+      box-shadow: inset 0 0 0 2px white, 0px 0px 7px -1px #37474f;
+    }
   }
+}
+
+.color-palette-wrapper {
+  display: flex;
+
+  @media screen and (max-width: 600px) {
+    flex-wrap: wrap;
+  }
+
+  .color-preview {
+    width: 1.5rem;
+    height: 1.5rem;
+    position: relative;
+    cursor: pointer;
+
+    &.selected {
+      box-shadow: inset 0 0 0 2px white, 0px 0px 7px -1px #37474f;
+      z-index: 100;
+    }
+  }
+}
+
+.color-values {
+  margin-top: 1rem;
 }
