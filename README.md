@@ -1,10 +1,17 @@
-# Material Color Converter
+<h1 align="center">
+  <br>
+    <img src="https://raw.githubusercontent.com/PKief/material-color-converter/master/src/assets/logo.png" alt="logo" width="200">
+  <br><br>
+  Material Color Converter
+  <br>
+  <br>
+</h1>
 
-Convert any CSS color to a similar color of the Material Design.
+<h4 align="center">Convert any CSS color to a similar color of the Material Design.</h4>
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/pkief/material-color-converter/Build%20Angular)
-
----
+<p align="center">
+    <a href="https://github.com/PKief/material-color-converter/actions?query=workflow%3A%22Build+Angular%22"><img src="https://img.shields.io/github/workflow/status/pkief/material-color-converter/Build%20Angular?style=for-the-badge&colorA=252526&colorB=43A047&label=Build" alt="Build"></a>
+</p>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.2.
 
