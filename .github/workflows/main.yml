@@ -16,7 +16,7 @@ jobs:
       - name: Install node_modules
         run: npm install
       - name: Run unit tests
-        run: npm test
+        run: npm test -- --no-watch
       - name: Run e2e tests (with cypress)
         uses: cypress-io/github-action@v2
         with:
