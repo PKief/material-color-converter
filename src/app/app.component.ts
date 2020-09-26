@@ -6,7 +6,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as chroma from 'chroma-js';
 import { materialColors } from './colors';
 
@@ -30,39 +29,21 @@ export class AppComponent implements OnInit {
 
   @ViewChild('container') container: ElementRef;
 
-  constructor(
-    private cdr: ChangeDetectorRef,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      // either use a random color or value of query param
-      const randomStartColor = params.color
-        ? { hex: params.color }
-        : materialColors[Math.floor(Math.random() * materialColors.length)];
-      this.colorForm = new FormGroup({
-        color: new FormControl(randomStartColor.hex, [
-          Validators.required,
-          this.validateCssColor,
-        ]),
-      });
-
-      // store color value as query param in URL
-      this.colorForm.valueChanges.subscribe((value) => {
-        const queryParams: Params = { color: value.color };
-        console.log(queryParams);
-        this.router.navigate([], {
-          relativeTo: this.route,
-          queryParams,
-        });
-      });
-
-      this.selectedColor = randomStartColor.hex;
-      this.convert();
+    // either use a random color or value of query param
+    const randomStartColor =
+      materialColors[Math.floor(Math.random() * materialColors.length)];
+    this.colorForm = new FormGroup({
+      color: new FormControl(randomStartColor.hex, [
+        Validators.required,
+        this.validateCssColor,
+      ]),
     });
 
+    this.selectedColor = randomStartColor.hex;
+    this.convert();
     this.generateColorPalette();
   }
 

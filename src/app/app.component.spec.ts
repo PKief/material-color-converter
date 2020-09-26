@@ -3,10 +3,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ActivatedRoute } from '@angular/router';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of } from 'rxjs';
 import { AppComponent } from './app.component';
+import { materialColors } from './colors';
 import { GithubCornerComponent } from './shared/github-corner/github-corner.component';
 import { ToHslPipe } from './shared/pipes/to-hsl.pipe';
 import { ToRgbPipe } from './shared/pipes/to-rgb.pipe';
@@ -15,14 +15,7 @@ describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
-  jest.mock('./colors', () => [{ category: 'red', hue: '50', hex: '#FFEBEE' }]);
-
   beforeEach(async () => {
-    const mockActivatedRoute = {
-      queryParams: of({
-        color: 'red',
-      }),
-    };
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
@@ -31,23 +24,44 @@ describe('AppComponent', () => {
         MatCardModule,
         MatFormFieldModule,
         MatInputModule,
+        NoopAnimationsModule,
       ],
       declarations: [AppComponent, ToHslPipe, ToRgbPipe, GithubCornerComponent],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          use: mockActivatedRoute,
-        },
-      ],
+      providers: [],
     }).compileComponents();
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges();
+    await fixture.whenStable();
   });
 
   it('should create the app', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should select random color from the material color palette', async () => {
+    expect(component.selectedColor).toBeDefined();
+    expect(
+      materialColors.some((c) => c.hex === component.selectedColor)
+    ).toBeTrue();
+  });
+
+  it('should generate color palette correctly', () => {
+    expect(component.colorPalette).toBeDefined();
+    expect(component.colorPalette.length).toBeGreaterThan(0);
+  });
+
+  it('should store the color value in the input if the color picker has changed', () => {
+    component.onChangeColorPicker({ srcElement: { value: '#eeeeee' } });
+    expect(component.colorForm.value.color).toBe('#eeeeee');
+  });
+
+  it('should not convert color if form value is invalid', () => {
+    component.colorForm.get('color').setValue('some invalid input');
+    component.convert();
+    expect(component.colorForm.invalid).toBeTrue();
   });
 });
