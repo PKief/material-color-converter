@@ -9,11 +9,20 @@
         <form [formGroup]="colorForm" (keyup)="convert()">
           <mat-form-field>
             <mat-label>CSS Color</mat-label>
-            <input matInput cdkFocusInitial formControlName="color" required />
-            <mat-error *ngIf="colorForm.get('color').hasError('required')"
+            <input
+              id="color-input"
+              matInput
+              cdkFocusInitial
+              formControlName="color"
+              required
+            />
+            <mat-error
+              id="required-error"
+              *ngIf="colorForm.get('color').hasError('required')"
               >Please enter a color!</mat-error
             >
             <mat-error
+              id="invalid-color-error"
               *ngIf="
                 colorForm.get('color').value.length > 0 && colorForm.invalid
               "
@@ -37,7 +46,7 @@
             >Material Design color system</a
           >.
         </p>
-        <ol class="result-list">
+        <ol id="result-list">
           <li
             class="result-item"
             *ngFor="let color of suggestedColors; let i = index"
@@ -53,7 +62,7 @@
       </div>
 
       <h2>Material Color Palette</h2>
-      <div class="color-palette-wrapper">
+      <div id="color-palette-wrapper">
         <div class="column" *ngFor="let category of colorPalette">
           <div class="row" *ngFor="let color of category">
             <div
@@ -67,17 +76,35 @@
       </div>
 
       <form class="color-values">
-        <mat-form-field class="example-full-width">
+        <mat-form-field>
           <mat-label>HEX</mat-label>
-          <input type="text" matInput [value]="selectedColor" />
+          <input
+            id="selected-color-value-hex"
+            type="text"
+            matInput
+            [value]="selectedColor"
+            readonly
+          />
         </mat-form-field>
-        <mat-form-field class="example-full-width">
+        <mat-form-field>
           <mat-label>RGB</mat-label>
-          <input type="text" matInput [value]="selectedColor | toRgb" />
+          <input
+            id="selected-color-value-rgb"
+            type="text"
+            matInput
+            [value]="selectedColor | toRgb"
+            readonly
+          />
         </mat-form-field>
-        <mat-form-field class="example-full-width">
+        <mat-form-field>
           <mat-label>HSL</mat-label>
-          <input type="text" matInput [value]="selectedColor | toHsl" />
+          <input
+            id="selected-color-value-hsl"
+            type="text"
+            matInput
+            [value]="selectedColor | toHsl"
+            readonly
+          />
         </mat-form-field>
       </form>
     </mat-card>

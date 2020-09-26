@@ -9,6 +9,10 @@
   @media screen and (max-width: 600px) {
     display: block;
   }
+
+  @media screen and (max-height: 1000px) {
+    align-items: start;
+  }
 }
 
 .color-input {
@@ -19,7 +23,7 @@
   }
 }
 
-ol.result-list {
+ol#result-list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -39,6 +43,7 @@ ol.result-list {
     width: 3rem;
     height: 3rem;
     margin-right: 1rem;
+    cursor: pointer;
 
     &.selected {
       box-shadow: inset 0 0 0 2px white, 0px 0px 7px -1px #37474f;
@@ -46,7 +51,7 @@ ol.result-list {
   }
 }
 
-.color-palette-wrapper {
+#color-palette-wrapper {
   display: flex;
 
   @media screen and (max-width: 600px) {
