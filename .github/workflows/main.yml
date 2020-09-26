@@ -23,8 +23,8 @@ jobs:
           browser: chrome
           headless: true
           start: npm start
-          # wait for 2 minutes for the server to respond
-          wait-on-timeout: 120
+          wait-on: "http://localhost:4200"
+          wait-on-timeout: 300
       - name: Build and deploy
         uses: JamesIves/github-pages-deploy-action@releases/v2
         env:
