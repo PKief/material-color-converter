@@ -9,14 +9,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-
-      - name: Cache node modules
-        uses: actions/cache@v1
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
       - name: Node ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -27,6 +19,9 @@ jobs:
         run: npm test
       - name: Run e2e tests (with cypress)
         uses: cypress-io/github-action@v2
+        with:
+          browser: chrome
+          headless: true
       - name: Build and deploy
         uses: JamesIves/github-pages-deploy-action@releases/v2
         env:
@@ -35,3 +30,10 @@ jobs:
           BRANCH: gh-pages
           FOLDER: dist/material-color-converter
           BUILD_SCRIPT: npm run build -- --prod --base-href https://pkief.github.io/material-color-converter/
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
