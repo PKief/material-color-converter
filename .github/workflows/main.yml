@@ -22,6 +22,7 @@ jobs:
         with:
           browser: chrome
           headless: true
+          start: npm start
       - name: Build and deploy
         uses: JamesIves/github-pages-deploy-action@releases/v2
         env:
