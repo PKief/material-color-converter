@@ -34,7 +34,7 @@ jobs:
           BRANCH: gh-pages
           FOLDER: dist/material-color-converter
           BUILD_SCRIPT: npm run build -- --prod --base-href https://pkief.github.io/material-color-converter/
-      - name: Cache node modules 💾
+      - name: Cache node_modules 💾
         uses: actions/cache@v1
         with:
           path: ~/.npm
