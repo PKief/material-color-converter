@@ -8,16 +8,17 @@ jobs:
         node-version: [12.x]
 
     steps:
-      - uses: actions/checkout@v1
-      - name: Node ${{ matrix.node-version }}
+      - name: Checkout 🛎
+        uses: actions/checkout@v1
+      - name: Setup Node ${{ matrix.node-version }} ⚙
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install node_modules
+      - name: Install node_modules 📦
         run: npm install
-      - name: Run unit tests
+      - name: Run unit tests 🧪
         run: npm test -- --no-watch
-      - name: Run e2e tests (with cypress)
+      - name: Run e2e tests (with cypress) 🖥
         uses: cypress-io/github-action@v2
         with:
           browser: chrome
@@ -25,7 +26,7 @@ jobs:
           start: npm start
           wait-on: "http://localhost:4200"
           wait-on-timeout: 300
-      - name: Build and deploy
+      - name: Build and deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v2
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
@@ -33,7 +34,7 @@ jobs:
           BRANCH: gh-pages
           FOLDER: dist/material-color-converter
           BUILD_SCRIPT: npm run build -- --prod --base-href https://pkief.github.io/material-color-converter/
-      - name: Cache node modules
+      - name: Cache node modules 💾
         uses: actions/cache@v1
         with:
           path: ~/.npm
