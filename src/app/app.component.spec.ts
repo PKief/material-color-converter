@@ -55,12 +55,13 @@ describe('AppComponent', () => {
   });
 
   it('should store the color value in the input if the color picker has changed', () => {
-    component.onChangeColorPicker({ srcElement: { value: '#eeeeee' } });
+    const event = { target: { value: '#eeeeee' } as HTMLInputElement };
+    component.onChangeColorPicker(event as unknown as Event);
     expect(component.colorForm.value.color).toBe('#eeeeee');
   });
 
   it('should not convert color if form value is invalid', () => {
-    component.colorForm.get('color').setValue('some invalid input');
+    component.colorForm.get('color')?.setValue('some invalid input');
     component.convert();
     expect(component.colorForm.invalid).toBeTrue();
   });
