@@ -18,13 +18,13 @@
             />
             <mat-error
               id="required-error"
-              *ngIf="colorForm.get('color').hasError('required')"
+              *ngIf="colorForm.get('color')?.hasError('required')"
               >Please enter a color!</mat-error
             >
             <mat-error
               id="invalid-color-error"
               *ngIf="
-                colorForm.get('color').value.length > 0 && colorForm.invalid
+                colorForm.get('color')?.value.length > 0 && colorForm.invalid
               "
               >Color is invalid!</mat-error
             >

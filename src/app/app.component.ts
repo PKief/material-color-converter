@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as chroma from 'chroma-js';
-import { materialColors } from './colors';
+import { Color, materialColors } from './colors';
 
 interface ResultColor {
   hex: string;
@@ -25,24 +25,26 @@ export class AppComponent implements OnInit {
   colorForm: FormGroup;
   suggestedColors: ResultColor[] = [];
   selectedColor = '#ffffff';
-  colorPalette: ResultColor[][];
+  colorPalette: Color[][] = [];
 
-  @ViewChild('container') container: ElementRef;
+  @ViewChild('container')
+  container!: ElementRef;
 
-  constructor(private cdr: ChangeDetectorRef) {}
-
-  ngOnInit(): void {
+  constructor(private cdr: ChangeDetectorRef) {
     // either use a random color or value of query param
     const randomStartColor =
       materialColors[Math.floor(Math.random() * materialColors.length)];
+
+    this.selectedColor = randomStartColor.hex;
     this.colorForm = new FormGroup({
       color: new FormControl(randomStartColor.hex, [
         Validators.required,
         this.validateCssColor,
       ]),
     });
+  }
 
-    this.selectedColor = randomStartColor.hex;
+  ngOnInit(): void {
     this.convert();
     this.generateColorPalette();
   }
@@ -52,24 +54,30 @@ export class AppComponent implements OnInit {
    */
   generateColorPalette(): void {
     // group colors by category (e.g. red or orange)
-    const colorMap = materialColors.reduce((result, color, i) => {
-      (result[color.category] = result[color.category] || []).push(color);
-      return result;
-    }, {});
+    const colorMap = materialColors.reduce<Record<string, Color[]>>(
+      (result, color) => {
+        (result[color.category] = result[color.category] || []).push(color);
+        return result;
+      },
+      {}
+    );
 
     // create two dimensional array for each category
-    this.colorPalette = Object.keys(colorMap).reduce((result, key, i) => {
-      result.push(colorMap[key]);
-      return result;
-    }, []);
+    this.colorPalette = Object.keys(colorMap).reduce<Color[][]>(
+      (result, key) => {
+        result.push(colorMap[key]);
+        return result;
+      },
+      []
+    );
   }
 
   /**
    * If a color has been entered via the color picker store the value also in the input element
    */
-  onChangeColorPicker(event): void {
-    const color = event.srcElement.value;
-    this.colorForm.get('color').setValue(color);
+  onChangeColorPicker(event: Event): void {
+    const color = (event.target as HTMLInputElement).value;
+    this.colorForm.get('color')?.setValue(color);
     this.convert();
   }
 
@@ -111,9 +119,8 @@ export class AppComponent implements OnInit {
    * Update background of the container with the color which was entered by the user
    */
   updateBackground(inputColor: string): void {
-    this.container.nativeElement.style.backgroundColor = chroma(
-      inputColor
-    ).alpha(0.65);
+    this.container.nativeElement.style.backgroundColor =
+      chroma(inputColor).alpha(0.65);
   }
 
   /**
@@ -134,10 +141,11 @@ export class AppComponent implements OnInit {
   /**
    * Get color value of the form for the color picker
    */
-  getColorFormValue(): string {
-    const color = this.colorForm.get('color').value;
-    if (chroma.valid(color)) {
+  getColorFormValue(): string | undefined {
+    const color = this.colorForm.get('color')?.value;
+    if (color && chroma.valid(color)) {
       return chroma(color).hex();
     }
+    return undefined;
   }
 }
