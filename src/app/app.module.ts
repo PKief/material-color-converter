@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
+import { IMaskModule } from 'angular-imask';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +16,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    IMaskModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
