@@ -3,71 +3,35 @@
   <div>
     <mat-card class="color-card">
       <h1>Material Color Converter</h1>
-      <div class="color-input">
-        <h2>Enter Color Code</h2>
-        <p>Enter HEX colors code or RGB value</p>
-        <form [formGroup]="colorForm" (keyup)="convert()">
-          <mat-form-field>
-            <mat-label>CSS Color</mat-label>
-            <input
-              id="color-input"
-              matInput
-              cdkFocusInitial
-              formControlName="color"
-              [imask]="colorPatternMask"
-              required
-            />
-            <mat-error
-              id="required-error"
-              *ngIf="colorForm.get('color')?.hasError('required')"
-              >Please enter a color!</mat-error
-            >
-            <input
-              type="color"
-              matSuffix
-              [value]="getColorFormValue()"
-              (change)="onChangeColorPicker($event)"
-            />
-          </mat-form-field>
-        </form>
+      <app-color-input
+        (convert)="convert($event)"
+        [selectedColor]="selectedColor"
+      ></app-color-input>
 
-        <h2>Suggested Material Colors</h2>
-        <p>
-          These are matching colors that are included in the
-          <a
-            href="https://material.io/design/color/the-color-system.html"
-            target="_blank"
-            >Material Design color system</a
-          >.
-        </p>
-        <ol id="result-list">
-          <li
-            class="result-item"
-            *ngFor="let color of suggestedColors; let i = index"
-            (click)="selectedColor = color.hex"
-          >
-            <div
-              class="color-preview"
-              [class.selected]="selectedColor === color.hex"
-              [style.backgroundColor]="color.hex"
-            ></div>
-          </li>
-        </ol>
-      </div>
+      <h2>Suggested Material Colors</h2>
+      <p>
+        These are matching colors that are included in the
+        <a
+          href="https://material.io/design/color/the-color-system.html"
+          target="_blank"
+          >Material Design color system</a
+        >.
+      </p>
+      <ol id="result-list">
+        <li
+          class="result-item"
+          *ngFor="let color of suggestedColors; let i = index"
+          (click)="selectedColor = color.hex"
+        >
+          <div
+            class="color-preview"
+            [class.selected]="selectedColor === color.hex"
+            [style.backgroundColor]="color.hex"
+          ></div>
+        </li>
+      </ol>
 
-      <h2>Material Color Palette</h2>
-      <div id="color-palette-wrapper">
-        <div class="column" *ngFor="let category of colorPalette">
-          <div class="row" *ngFor="let color of category">
-            <div
-              class="color-preview"
-              [style.backgroundColor]="color.hex"
-              [class.selected]="selectedColor === color.hex"
-              (click)="selectedColor = color.hex"
-            ></div>
-          </div>
-        </div>
-      </div>
+      <app-color-palette [selectedColor]="selectedColor"></app-color-palette>
 
       <form class="color-values">
         <mat-form-field>
@@ -77,26 +41,6 @@
             type="text"
             matInput
             [value]="selectedColor"
-            readonly
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>RGB</mat-label>
-          <input
-            id="selected-color-value-rgb"
-            type="text"
-            matInput
-            [value]="selectedColor | toRgb"
-            readonly
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>HSL</mat-label>
-          <input
-            id="selected-color-value-hsl"
-            type="text"
-            matInput
-            [value]="selectedColor | toHsl"
             readonly
           />
         </mat-form-field>

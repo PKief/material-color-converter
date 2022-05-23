@@ -1,0 +1,28 @@
+<div class="color-input">
+  <h2>Enter Color Code</h2>
+  <p>Type color here <code>#HEX</code> or <code>RRR,GGG,BBB</code></p>
+  <form [formGroup]="colorForm" (keyup)="triggerConvert()">
+    <mat-form-field>
+      <mat-label>CSS Color</mat-label>
+      <input
+        id="color-input"
+        matInput
+        cdkFocusInitial
+        formControlName="color"
+        [imask]="colorPatternMask"
+        required
+      />
+      <mat-error
+        id="required-error"
+        *ngIf="colorForm.get('color')?.hasError('required')"
+        >Please enter a color!</mat-error
+      >
+      <input
+        type="color"
+        matSuffix
+        [value]="getColorFormValue()"
+        (change)="onChangeColorPicker($event)"
+      />
+    </mat-form-field>
+  </form>
+</div>

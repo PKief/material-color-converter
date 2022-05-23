@@ -6,9 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { IMaskModule } from 'angular-imask';
+import { ColorInputComponent } from './color-input/color-input.component';
+import { ColorPaletteComponent } from './color-palette/color-palette.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ColorInputComponent, ColorPaletteComponent],
   imports: [
     SharedModule,
     BrowserModule,
