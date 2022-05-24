@@ -5,7 +5,7 @@
       <h1>Material Color Converter</h1>
       <div class="color-input">
         <h2>Enter Color Code</h2>
-        <p>Enter your color code here (e.g. "red" or "#ff0000")</p>
+        <p>Enter HEX colors code or RGB value</p>
         <form [formGroup]="colorForm" (keyup)="convert()">
           <mat-form-field>
             <mat-label>CSS Color</mat-label>
@@ -14,19 +14,13 @@
               matInput
               cdkFocusInitial
               formControlName="color"
+              [imask]="colorPatternMask"
               required
             />
             <mat-error
               id="required-error"
               *ngIf="colorForm.get('color')?.hasError('required')"
               >Please enter a color!</mat-error
-            >
-            <mat-error
-              id="invalid-color-error"
-              *ngIf="
-                colorForm.get('color')?.value.length > 0 && colorForm.invalid
-              "
-              >Color is invalid!</mat-error
             >
             <input
               type="color"

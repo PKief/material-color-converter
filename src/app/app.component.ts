@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as chroma from 'chroma-js';
+import IMask from 'imask';
 import { Color, materialColors } from './colors';
 
 interface ResultColor {
@@ -30,46 +31,49 @@ export class AppComponent implements OnInit {
   @ViewChild('container')
   container!: ElementRef;
 
+  colorPatternMask!: IMask.MaskedDynamic;
+
   constructor(private cdr: ChangeDetectorRef) {
-    // either use a random color or value of query param
-    const randomStartColor =
-      materialColors[Math.floor(Math.random() * materialColors.length)];
+    const randomStartColor = this.getRandomColor();
 
     this.selectedColor = randomStartColor.hex;
     this.colorForm = new FormGroup({
-      color: new FormControl(randomStartColor.hex, [
-        Validators.required,
-        this.validateCssColor,
-      ]),
+      color: new FormControl(randomStartColor.hex, [Validators.required]),
     });
   }
 
   ngOnInit(): void {
     this.convert();
     this.generateColorPalette();
+
+    this.colorPatternMask = IMask.createMask({
+      mask: [
+        {
+          mask: 'RGB,RGB,RGB',
+          blocks: {
+            RGB: {
+              mask: IMask.MaskedRange,
+              from: 0,
+              to: 255,
+            },
+          },
+        },
+        {
+          mask: /^#[0-9a-f]{0,6}$/i,
+        },
+      ],
+    });
   }
 
   /**
-   * Generate the color palette to show all colors of the Material Design Color Palette
+   * Get color value of the form for the color picker
    */
-  generateColorPalette(): void {
-    // group colors by category (e.g. red or orange)
-    const colorMap = materialColors.reduce<Record<string, Color[]>>(
-      (result, color) => {
-        (result[color.category] = result[color.category] || []).push(color);
-        return result;
-      },
-      {}
-    );
-
-    // create two dimensional array for each category
-    this.colorPalette = Object.keys(colorMap).reduce<Color[][]>(
-      (result, key) => {
-        result.push(colorMap[key]);
-        return result;
-      },
-      []
-    );
+  getColorFormValue(): string | undefined {
+    const color = this.colorForm.get('color')?.value;
+    if (color && chroma.valid(color)) {
+      return chroma(color).hex();
+    }
+    return undefined;
   }
 
   /**
@@ -115,37 +119,38 @@ export class AppComponent implements OnInit {
     this.selectedColor = this.suggestedColors[0].hex;
   }
 
+  private getRandomColor() {
+    return materialColors[Math.floor(Math.random() * materialColors.length)];
+  }
+
+  /**
+   * Generate the color palette to show all colors of the Material Design Color Palette
+   */
+  private generateColorPalette(): void {
+    // group colors by category (e.g. red or orange)
+    const colorMap = materialColors.reduce<Record<string, Color[]>>(
+      (result, color) => {
+        (result[color.category] = result[color.category] || []).push(color);
+        return result;
+      },
+      {}
+    );
+
+    // create two dimensional array for each category
+    this.colorPalette = Object.keys(colorMap).reduce<Color[][]>(
+      (result, key) => {
+        result.push(colorMap[key]);
+        return result;
+      },
+      []
+    );
+  }
+
   /**
    * Update background of the container with the color which was entered by the user
    */
-  updateBackground(inputColor: string): void {
+  private updateBackground(inputColor: string): void {
     this.container.nativeElement.style.backgroundColor =
       chroma(inputColor).alpha(0.65);
-  }
-
-  /**
-   * Validate the color code
-   */
-  validateCssColor(
-    color: FormControl
-  ): null | { validateCssColor: { valid: boolean } } {
-    return chroma.valid(color.value)
-      ? null
-      : {
-          validateCssColor: {
-            valid: false,
-          },
-        };
-  }
-
-  /**
-   * Get color value of the form for the color picker
-   */
-  getColorFormValue(): string | undefined {
-    const color = this.colorForm.get('color')?.value;
-    if (color && chroma.valid(color)) {
-      return chroma(color).hex();
-    }
-    return undefined;
   }
 }
