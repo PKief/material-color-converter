@@ -5,7 +5,7 @@
         class="color-preview"
         [style.backgroundColor]="color.hex"
         [class.selected]="selectedColor === color.hex"
-        (click)="selectedColor = color.hex"
+        (click)="selectColor.emit(color.hex)"
         tabindex="0"
       ></div>
     </div>

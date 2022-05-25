@@ -43,6 +43,10 @@ export class AppComponent implements OnInit {
     this.selectedColor = this.suggestedColors[0].hex;
   }
 
+  selectColor(color: string): void {
+    this.selectedColor = color;
+  }
+
   private getRandomColor() {
     return materialColors[Math.floor(Math.random() * materialColors.length)];
   }

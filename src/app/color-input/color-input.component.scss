@@ -5,8 +5,12 @@
 }
 
 .color-form {
-  display: flex;
+  display: grid;
   justify-content: center;
+  justify-items: center;
+  align-items: baseline;
+  grid-template-columns: 4fr 1fr 4fr;
+
   .color-form-field {
     width: 100%;
   }

@@ -25,5 +25,13 @@
 }
 
 .color-values {
-  margin-top: 1rem;
+  width: 100%;
+  border: 1px solid #c6c6c6;
+  padding: 2rem;
+  border-radius: 5px;
+  margin-top: 3rem;
+
+  mat-form-field {
+    width: 100%;
+  }
 }

@@ -7,12 +7,12 @@
         class="color-form"
       >
         <mat-form-field class="color-form-field">
-          <mat-label>CSS Color</mat-label>
+          <mat-label>Arbitrary CSS Color</mat-label>
           <input
             id="color-input"
             matInput
             cdkFocusInitial
-            formControlName="color"
+            formControlName="colorInput"
             [imask]="colorPatternMask"
             required
           />
@@ -28,6 +28,18 @@
             (change)="onChangeColorPicker($event)"
           />
           <mat-hint> Enter either HEX or RGB color values. </mat-hint>
+        </mat-form-field>
+
+        <mat-icon> arrow_forward </mat-icon>
+
+        <mat-form-field class="color-form-field">
+          <mat-label>Material Design Color</mat-label>
+          <input
+            id="color-output"
+            matInput
+            formControlName="colorOutput"
+            readonly
+          />
         </mat-form-field>
       </form>
     </mat-card>

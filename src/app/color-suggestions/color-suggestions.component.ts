@@ -1,10 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { listAnimation } from '../shared/animations/list-animation';
 import { ResultColor } from '../shared/models';
 
 @Component({
   selector: 'app-color-suggestions',
   templateUrl: './color-suggestions.component.html',
   styleUrls: ['./color-suggestions.component.scss'],
+  animations: [listAnimation],
 })
 export class ColorSuggestionsComponent {
   @Input()

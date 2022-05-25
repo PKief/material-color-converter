@@ -12,21 +12,30 @@ export class ColorInputComponent implements OnInit {
   colorForm: FormGroup;
   colorPatternMask!: IMask.MaskedDynamic;
 
+  private _selectedColor: string | undefined;
+
   @Input()
-  selectedColor: string | undefined;
+  set selectedColor(value: string | undefined) {
+    this._selectedColor = value;
+    this.setColor();
+  }
+
+  get selectedColor() {
+    return this._selectedColor;
+  }
 
   @Output()
   convert = new EventEmitter<string>();
 
   constructor() {
     this.colorForm = new FormGroup({
-      color: new FormControl('', [Validators.required]),
+      colorInput: new FormControl('', [Validators.required]),
+      colorOutput: new FormControl('', [Validators.required]),
     });
   }
 
   ngOnInit(): void {
     this.setInputMask();
-    this.setColor();
   }
 
   /**
@@ -34,13 +43,13 @@ export class ColorInputComponent implements OnInit {
    */
   onChangeColorPicker(event: Event): void {
     const color = (event.target as HTMLInputElement).value;
-    this.colorForm.get('color')?.setValue(color);
+    this.colorForm.get('colorInput')?.setValue(color);
     this.triggerConvert();
   }
 
   triggerConvert(): void {
     if (this.colorForm.valid) {
-      this.convert.emit(this.colorForm.value.color);
+      this.convert.emit(this.colorForm.value.colorInput);
     }
   }
 
@@ -48,7 +57,7 @@ export class ColorInputComponent implements OnInit {
    * Get color value of the form for the color picker
    */
   getColorFormValue(): string | undefined {
-    const color = this.colorForm.get('color')?.value;
+    const color = this.colorForm.get('colorInput')?.value;
     if (color && chroma.valid(color)) {
       return chroma(color).hex();
     }
@@ -57,7 +66,7 @@ export class ColorInputComponent implements OnInit {
 
   private setColor() {
     const color = this.selectedColor ?? '#FFFFFF';
-    this.colorForm.get('color')?.setValue(color);
+    this.colorForm.get('colorOutput')?.setValue(color);
   }
 
   private setInputMask() {

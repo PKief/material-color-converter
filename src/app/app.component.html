@@ -21,31 +21,16 @@
           <app-color-suggestions
             [selectedColor]="selectedColor"
             [suggestedColors]="suggestedColors"
+            (selectColor)="selectColor($event)"
           ></app-color-suggestions>
         </div>
         <div class="col-lg-10 col-12 mt-lg-0 mt-4">
           <app-color-palette
             [selectedColor]="selectedColor"
+            (selectColor)="selectColor($event)"
           ></app-color-palette>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="row d-flex justify-content-center">
-    <div class="col-8">
-      <form class="color-values">
-        <mat-form-field>
-          <mat-label>HEX</mat-label>
-          <input
-            id="selected-color-value-hex"
-            type="text"
-            matInput
-            [value]="selectedColor"
-            readonly
-          />
-        </mat-form-field>
-      </form>
     </div>
   </div>
 </div>

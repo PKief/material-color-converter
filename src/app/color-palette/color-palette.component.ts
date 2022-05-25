@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Color, materialColors } from '../colors';
 import { listAnimation } from '../shared/animations/list-animation';
 
@@ -11,6 +11,9 @@ import { listAnimation } from '../shared/animations/list-animation';
 export class ColorPaletteComponent implements OnInit {
   @Input()
   selectedColor: string | undefined;
+
+  @Output()
+  selectColor = new EventEmitter<string>();
 
   colorPalette: Color[][] = [];
 
