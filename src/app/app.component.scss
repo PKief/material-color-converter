@@ -1,54 +1,27 @@
-.container {
-  width: 100%;
-  min-height: 100%;
+.header-container {
+  background: linear-gradient(0deg, #ffffff 15%, #ffeb3b2e 15%);
+}
+
+.app-header {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  transition: background ease 1s;
 
-  @media screen and (max-width: 600px) {
-    display: block;
+  h1.app-title {
+    color: #263238;
+    font-weight: 300;
+    font-size: 24px;
+    letter-spacing: 0.5px;
   }
 
-  @media screen and (max-height: 850px) {
-    align-items: start;
-  }
-}
-
-.color-input {
-  form {
-    mat-form-field {
-      width: 100%;
-    }
+  img.app-logo {
+    width: 9rem;
+    padding: 2rem 0px;
   }
 }
 
-ol#result-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-
-  @media screen and (max-width: 600px) {
-    flex-wrap: wrap;
-  }
-
-  li.result-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-
-  .color-preview {
-    width: 3rem;
-    height: 3rem;
-    margin-right: 1rem;
-    cursor: pointer;
-
-    &.selected {
-      box-shadow: inset 0 0 0 2px white, 0px 0px 7px -1px #37474f;
-    }
-  }
+.color-input-section {
+  width: 100%;
 }
 
 .color-values {

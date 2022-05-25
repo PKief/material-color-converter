@@ -8,9 +8,10 @@ import { SharedModule } from './shared/shared.module';
 import { IMaskModule } from 'angular-imask';
 import { ColorInputComponent } from './color-input/color-input.component';
 import { ColorPaletteComponent } from './color-palette/color-palette.component';
+import { ColorSuggestionsComponent } from './color-suggestions/color-suggestions.component';
 
 @NgModule({
-  declarations: [AppComponent, ColorInputComponent, ColorPaletteComponent],
+  declarations: [AppComponent, ColorInputComponent, ColorPaletteComponent, ColorSuggestionsComponent],
   imports: [
     SharedModule,
     BrowserModule,

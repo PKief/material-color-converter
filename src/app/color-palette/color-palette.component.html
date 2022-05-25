@@ -1,12 +1,12 @@
-<h2>Material Color Palette</h2>
 <div id="color-palette-wrapper">
-  <div class="column" *ngFor="let category of colorPalette">
-    <div class="row" *ngFor="let color of category">
+  <div *ngFor="let category of colorPalette" [@listAnimation]="colorPalette.length">
+    <div *ngFor="let color of category" [@listAnimation]="category.length">
       <div
         class="color-preview"
         [style.backgroundColor]="color.hex"
         [class.selected]="selectedColor === color.hex"
         (click)="selectedColor = color.hex"
+        tabindex="0"
       ></div>
     </div>
   </div>

@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Color, materialColors } from '../colors';
+import { listAnimation } from '../shared/animations/list-animation';
 
 @Component({
   selector: 'app-color-palette',
   templateUrl: './color-palette.component.html',
   styleUrls: ['./color-palette.component.scss'],
+  animations: [listAnimation],
 })
 export class ColorPaletteComponent implements OnInit {
   @Input()

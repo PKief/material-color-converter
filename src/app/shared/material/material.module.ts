@@ -9,6 +9,7 @@ import {
 } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline',
@@ -20,6 +21,7 @@ const modules = [
   MatFormFieldModule,
   MatInputModule,
   MatIconModule,
+  MatToolbarModule,
 ];
 
 @NgModule({

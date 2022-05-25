@@ -7,17 +7,14 @@ import {
 } from '@angular/core';
 import { getSuggestions } from 'svg-color-linter';
 import { materialColors } from './colors';
-
-interface ResultColor {
-  hex: string;
-  distance: number;
-}
+import { listAnimation } from './shared/animations/list-animation';
+import { ResultColor } from './shared/models';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [],
+  animations: [listAnimation],
 })
 export class AppComponent implements OnInit {
   suggestedColors: ResultColor[] = [];
@@ -43,19 +40,10 @@ export class AppComponent implements OnInit {
     );
 
     this.cdr.detectChanges();
-    this.updateBackground(color);
-
     this.selectedColor = this.suggestedColors[0].hex;
   }
 
   private getRandomColor() {
     return materialColors[Math.floor(Math.random() * materialColors.length)];
-  }
-
-  /**
-   * Update background of the container with the color which was entered by the user
-   */
-  private updateBackground(color: string): void {
-    this.container.nativeElement.style.backgroundColor = color;
   }
 }
