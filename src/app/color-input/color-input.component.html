@@ -4,7 +4,7 @@
       <form
         [formGroup]="colorForm"
         (keyup)="triggerConvert()"
-        class="color-form"
+        class="color-form d-flex justify-content-between align-items-center gap-lg-4 align-items-lg-baseline flex-lg-row flex-column"
       >
         <mat-form-field class="color-form-field">
           <mat-label>Arbitrary CSS Color</mat-label>
@@ -30,7 +30,8 @@
           <mat-hint> Enter either HEX or RGB color values. </mat-hint>
         </mat-form-field>
 
-        <mat-icon> arrow_forward </mat-icon>
+        <mat-icon class="d-none d-lg-block"> arrow_forward </mat-icon>
+        <mat-icon class="d-lg-none mb-2"> arrow_downward </mat-icon>
 
         <mat-form-field class="color-form-field">
           <mat-label>Material Design Color</mat-label>
