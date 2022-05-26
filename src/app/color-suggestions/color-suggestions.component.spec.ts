@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ColorSuggestionsComponent } from './color-suggestions.component';
 
 describe('ColorSuggestionsComponent', () => {
@@ -8,9 +8,9 @@ describe('ColorSuggestionsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ColorSuggestionsComponent ]
-    })
-    .compileComponents();
+      imports: [BrowserAnimationsModule],
+      declarations: [ColorSuggestionsComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
