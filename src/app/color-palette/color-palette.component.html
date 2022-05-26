@@ -1,0 +1,13 @@
+<div id="color-palette-wrapper">
+  <div *ngFor="let category of colorPalette" [@listAnimation]="colorPalette.length">
+    <div *ngFor="let color of category" [@listAnimation]="category.length">
+      <div
+        class="color-preview"
+        [style.backgroundColor]="color.hex"
+        [class.selected]="selectedColor === color.hex"
+        (click)="selectColor.emit(color.hex)"
+        tabindex="0"
+      ></div>
+    </div>
+  </div>
+</div>

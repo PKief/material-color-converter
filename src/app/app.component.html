@@ -1,106 +1,37 @@
-<app-github-corner></app-github-corner>
-<div class="container" #container>
-  <div>
-    <mat-card class="color-card">
-      <h1>Material Color Converter</h1>
-      <div class="color-input">
-        <h2>Enter Color Code</h2>
-        <p>Enter HEX colors code or RGB value</p>
-        <form [formGroup]="colorForm" (keyup)="convert()">
-          <mat-form-field>
-            <mat-label>CSS Color</mat-label>
-            <input
-              id="color-input"
-              matInput
-              cdkFocusInitial
-              formControlName="color"
-              [imask]="colorPatternMask"
-              required
-            />
-            <mat-error
-              id="required-error"
-              *ngIf="colorForm.get('color')?.hasError('required')"
-              >Please enter a color!</mat-error
-            >
-            <input
-              type="color"
-              matSuffix
-              [value]="getColorFormValue()"
-              (change)="onChangeColorPicker($event)"
-            />
-          </mat-form-field>
-        </form>
+<div class="header-container">
+  <div class="app-header container">
+    <img src="../assets/logo.png" alt="App Logo" class="app-logo" />
+    <h1 class="app-title">Material Color Converter</h1>
+  </div>
+  <div class="color-input-section pt-4">
+    <div #container class="container">
+      <app-color-input-output
+        (convert)="convert($event)"
+        [selectedColor]="selectedColor"
+        [initialColor]="initialColor"
+      ></app-color-input-output>
+    </div>
+  </div>
+</div>
 
-        <h2>Suggested Material Colors</h2>
-        <p>
-          These are matching colors that are included in the
-          <a
-            href="https://material.io/design/color/the-color-system.html"
-            target="_blank"
-            >Material Design color system</a
-          >.
-        </p>
-        <ol id="result-list">
-          <li
-            class="result-item"
-            *ngFor="let color of suggestedColors; let i = index"
-            (click)="selectedColor = color.hex"
-          >
-            <div
-              class="color-preview"
-              [class.selected]="selectedColor === color.hex"
-              [style.backgroundColor]="color.hex"
-            ></div>
-          </li>
-        </ol>
-      </div>
-
-      <h2>Material Color Palette</h2>
-      <div id="color-palette-wrapper">
-        <div class="column" *ngFor="let category of colorPalette">
-          <div class="row" *ngFor="let color of category">
-            <div
-              class="color-preview"
-              [style.backgroundColor]="color.hex"
-              [class.selected]="selectedColor === color.hex"
-              (click)="selectedColor = color.hex"
-            ></div>
-          </div>
+<div class="container mt-lg-5 mt-2">
+  <div class="row d-flex justify-content-center">
+    <div class="col-12 col-lg-8">
+      <div class="row">
+        <div class="col-lg-2 col-12">
+          <app-color-suggestions
+            [selectedColor]="selectedColor"
+            [suggestedColors]="suggestedColors"
+            (selectColor)="selectColor($event)"
+          ></app-color-suggestions>
+        </div>
+        <div class="col-lg-10 col-12 mt-lg-0 mt-4">
+          <app-color-palette
+            [selectedColor]="selectedColor"
+            (selectColor)="selectColor($event)"
+          ></app-color-palette>
         </div>
       </div>
-
-      <form class="color-values">
-        <mat-form-field>
-          <mat-label>HEX</mat-label>
-          <input
-            id="selected-color-value-hex"
-            type="text"
-            matInput
-            [value]="selectedColor"
-            readonly
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>RGB</mat-label>
-          <input
-            id="selected-color-value-rgb"
-            type="text"
-            matInput
-            [value]="selectedColor | toRgb"
-            readonly
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>HSL</mat-label>
-          <input
-            id="selected-color-value-hsl"
-            type="text"
-            matInput
-            [value]="selectedColor | toHsl"
-            readonly
-          />
-        </mat-form-field>
-      </form>
-    </mat-card>
+    </div>
   </div>
 </div>
