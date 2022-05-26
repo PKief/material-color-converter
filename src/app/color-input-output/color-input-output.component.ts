@@ -4,11 +4,11 @@ import * as chroma from 'chroma-js';
 import * as IMask from 'imask';
 
 @Component({
-  selector: 'app-color-input',
-  templateUrl: './color-input.component.html',
-  styleUrls: ['./color-input.component.scss'],
+  selector: 'app-color-input-output',
+  templateUrl: './color-input-output.component.html',
+  styleUrls: ['./color-input-output.component.scss'],
 })
-export class ColorInputComponent implements OnInit {
+export class ColorInputOutputComponent implements OnInit {
   colorForm: FormGroup;
   colorPatternMask!: IMask.MaskedDynamic;
 
