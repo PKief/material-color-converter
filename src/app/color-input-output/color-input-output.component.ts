@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as chroma from 'chroma-js';
-import * as IMask from 'imask';
+import { OutputFormat } from '../shared/models';
 
 @Component({
   selector: 'app-color-input-output',
@@ -10,14 +10,32 @@ import * as IMask from 'imask';
 })
 export class ColorInputOutputComponent implements OnInit {
   colorForm: FormGroup;
-  colorPatternMask!: IMask.MaskedDynamic;
+  copiedToClipboard = false;
+  supportedOutputFormats: OutputFormat[] = [
+    {
+      name: 'hex',
+      active: true,
+      transform: (color) => chroma(color).hex(),
+    },
+    {
+      name: 'rgb',
+      active: false,
+      transform: (color) => chroma(color).css(),
+    },
+    {
+      name: 'hsl',
+      active: false,
+      transform: (color) => chroma(color).css('hsl'),
+    },
+  ];
 
-  private _selectedColor: string | undefined;
+  @Input()
+  initialColor: string | undefined;
 
   @Input()
   set selectedColor(value: string | undefined) {
     this._selectedColor = value;
-    this.setColor();
+    this.setOutput();
   }
 
   get selectedColor() {
@@ -27,15 +45,20 @@ export class ColorInputOutputComponent implements OnInit {
   @Output()
   convert = new EventEmitter<string>();
 
+  private _selectedColor: string | undefined;
+
   constructor() {
     this.colorForm = new FormGroup({
-      colorInput: new FormControl('', [Validators.required]),
-      colorOutput: new FormControl('', [Validators.required]),
+      colorInput: new FormControl('', [
+        Validators.required,
+        this.validateCssColor,
+      ]),
+      colorOutput: new FormControl(''),
     });
   }
 
   ngOnInit(): void {
-    this.setInputMask();
+    this.setInitialColor();
   }
 
   /**
@@ -64,28 +87,49 @@ export class ColorInputOutputComponent implements OnInit {
     return undefined;
   }
 
-  private setColor() {
-    const color = this.selectedColor ?? '#FFFFFF';
-    this.colorForm.get('colorOutput')?.setValue(color);
+  switchColorOutputFormat() {
+    const activeFormatIndex = this.supportedOutputFormats.findIndex(
+      (f) => f.active
+    );
+    this.supportedOutputFormats = this.supportedOutputFormats.map((f) => {
+      f.active = false;
+      return f;
+    });
+
+    const nextFormatIndex =
+      (activeFormatIndex + 1) % this.supportedOutputFormats.length;
+
+    this.supportedOutputFormats[nextFormatIndex].active = true;
+    this.setOutput();
   }
 
-  private setInputMask() {
-    this.colorPatternMask = IMask.createMask({
-      mask: [
-        {
-          mask: 'RGB,RGB,RGB',
-          blocks: {
-            RGB: {
-              mask: IMask.MaskedRange,
-              from: 0,
-              to: 255,
-            },
+  private setInitialColor() {
+    if (this.initialColor) {
+      this.colorForm.get('colorInput')?.setValue(this.initialColor);
+    }
+  }
+
+  private setOutput() {
+    const color = this.selectedColor ?? '#FFFFFF';
+    const activeFormatter = this.supportedOutputFormats.find(
+      (f) => f.active
+    )!.transform;
+    this.colorForm.get('colorOutput')?.setValue(activeFormatter(color));
+    this.copiedToClipboard = false;
+  }
+
+  /**
+   * Validate the color code
+   */
+  private validateCssColor(
+    color: FormControl
+  ): null | { validateCssColor: { valid: boolean } } {
+    return chroma.valid(color.value)
+      ? null
+      : {
+          validateCssColor: {
+            valid: false,
           },
-        },
-        {
-          mask: /^#[0-9a-f]{0,6}$/i,
-        },
-      ],
-    });
+        };
   }
 }

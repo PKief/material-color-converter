@@ -19,6 +19,7 @@ import { ResultColor } from './shared/models';
 export class AppComponent implements OnInit {
   suggestedColors: ResultColor[] = [];
   selectedColor: string | undefined;
+  initialColor: string | undefined;
 
   @ViewChild('container')
   container!: ElementRef;
@@ -26,8 +27,8 @@ export class AppComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.selectedColor = this.getRandomColor().hex;
-    this.convert(this.selectedColor);
+    this.initialColor = this.getRandomColor().hex;
+    this.convert(this.initialColor);
   }
 
   /**
