@@ -12,6 +12,11 @@ describe('When application page is loaded it', () => {
     cy.get('mat-error#required-error').should('be.visible');
   });
 
+  it('shows invalid error message if color value is invalid', () => {
+    cy.get('input#color-input').clear().type('invalid color value').blur();
+    cy.get('mat-error#invalid-color-error').should('be.visible');
+  });
+
   it('shows five suggested color values', () => {
     cy.get('input#color-input').clear().type('red').blur();
     cy.get('ol#result-list').find('li').should('have.length', 5);
