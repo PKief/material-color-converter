@@ -59,9 +59,12 @@
     }
   }
 
+  main,
   footer {
     background: mat.get-color-from-palette($background, "background");
+  }
 
+  footer {
     .footer-text {
       p,
       a {
