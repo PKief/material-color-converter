@@ -1,0 +1,119 @@
+@use "@angular/material" as mat;
+@import "@angular/material/theming";
+
+// custom background and foreground palettes
+$light-theme-background: (
+  status-bar: #cecece,
+  app-bar: rgba(#fff, 0.4),
+  background: #fdfdfd,
+  hover: rgba(#1d1d1f, 0.4),
+  card: rgb(245, 245, 245),
+  dialog: #eee,
+  disabled-button: #000000,
+  raised-button: map-get(mat.$grey-palette, 800),
+  focused-button: #000000,
+  selected-button: map_get(mat.$grey-palette, 900),
+  selected-disabled-button: map_get(mat.$grey-palette, 800),
+  disabled-button-toggle: black,
+  unselected-chip: map_get(mat.$grey-palette, 700),
+  disabled-list-option: black,
+);
+
+$light-theme-foreground: (
+  base: #1d1d1f,
+  divider: #e0e0e0,
+  dividers: #000000,
+  disabled: rgba(#1d1d1f, 1),
+  disabled-button: rgba(#1d1d1f, 1),
+  disabled-text: rgba(#1d1d1f, 1),
+  hint-text: rgba(#1d1d1f, 0.8),
+  secondary-text: rgba(#1d1d1f, 1),
+  icon: map-get(mat.$grey-palette, 600),
+  icons: #1d1d1f,
+  text: #1d1d1f,
+  slider-min: #1d1d1f,
+  slider-off: rgba(#1d1d1f, 1),
+  slider-off-active: rgba(#1d1d1f, 1),
+);
+
+@function create-light-theme(
+  $primary,
+  $accent,
+  $warn: mat.define-palette(mat.$red-palette)
+) {
+  @return (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    is-dark: false,
+    foreground: $light-theme-foreground,
+    background: $light-theme-background
+  );
+}
+
+$theme-primary: (
+  50: #424242,
+  100: #424242,
+  200: #424242,
+  300: #424242,
+  500: #424242,
+  900: #aaaaaa,
+  A100: #aaaaaa,
+  A200: #aaaaaa,
+  A400: #aaaaaa,
+  A700: #aaaaaa,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$theme-accent: (
+  50: #fffbf0,
+  100: #fff6da,
+  200: #fff0c1,
+  300: #ffe9a8,
+  400: #ffe595,
+  500: #ffe082,
+  600: #ffdc7a,
+  700: #ffd86f,
+  800: #ffd365,
+  900: #ffcb52,
+  A100: #ffffff,
+  A200: #ffffff,
+  A400: #fffdf7,
+  A700: #fff5de,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$light-theme-primary: mat.define-palette($theme-primary);
+$light-theme-accent: mat.define-palette($theme-accent);
+$light-theme-warn: mat.define-palette(mat.$red-palette);
+
+$light-theme: create-light-theme(
+  $light-theme-primary,
+  $light-theme-accent,
+  $light-theme-warn
+);

@@ -1,49 +1,77 @@
-.header-container {
-  background: linear-gradient(0deg, #ffffff 15%, #ffeb3b2e 15%);
-}
+@mixin app-theme($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $color-config: mat.get-color-config($theme);
+  $accent-palette: map-get($color-config, "accent");
 
-.app-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  h1.app-title {
-    color: #263238;
-    font-weight: 300;
-    font-size: 24px;
-    letter-spacing: 0.5px;
+  .app {
+    background: mat.get-color-from-palette($background, "background");
   }
 
-  img.app-logo {
-    width: 9rem;
-    padding: 2rem 0px;
+  header {
+    background: linear-gradient(
+      0deg,
+      mat.get-color-from-palette($background, "background") 15%,
+      mat.get-color-from-palette($accent-palette, 200) 15%
+    );
+
+    .dark-mode-toggle-area {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      mat-icon {
+        color: mat.get-color-from-palette($foreground, "text");
+      }
+    }
   }
-}
 
-.color-input-section {
-  width: 100%;
-}
+  .app-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-.color-values {
-  width: 100%;
-  border: 1px solid #c6c6c6;
-  padding: 2rem;
-  border-radius: 5px;
-  margin-top: 3rem;
+    h1.app-title {
+      color: mat.get-color-from-palette($foreground, "text");
+      font-weight: 300;
+      font-size: 24px;
+      letter-spacing: 0.5px;
+    }
 
-  mat-form-field {
+    img.app-logo {
+      width: 9rem;
+      padding: 2rem 0px;
+    }
+  }
+
+  .color-input-section {
     width: 100%;
   }
-}
 
-.footer-text {
-  p,
-  a {
-    color: #9e9e9e;
-    text-decoration: none;
+  .color-values {
+    width: 100%;
+    border: 1px solid mat.get-color-from-palette($foreground, "text");
+    padding: 2rem;
+    border-radius: 5px;
+    margin-top: 3rem;
+
+    mat-form-field {
+      width: 100%;
+    }
   }
 
-  img {
-    width: 2rem;
+  footer {
+    background: mat.get-color-from-palette($background, "background");
+
+    .footer-text {
+      p,
+      a {
+        color: mat.get-color-from-palette($foreground, "disabled-text");
+        text-decoration: none;
+      }
+
+      img {
+        width: 2rem;
+      }
+    }
   }
 }

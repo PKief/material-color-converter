@@ -5,8 +5,10 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { Observable } from 'rxjs';
 import { getSuggestions } from 'svg-color-linter';
 import { materialColors } from './colors';
+import { ThemeService } from './core/services/theme/theme.service';
 import { listAnimation } from './shared/animations/list-animation';
 import { ResultColor } from './shared/models';
 
@@ -20,15 +22,20 @@ export class AppComponent implements OnInit {
   suggestedColors: ResultColor[] = [];
   selectedColor: string | undefined;
   initialColor: string | undefined;
+  appColorTheme$: Observable<string> | undefined;
 
   @ViewChild('container')
   container!: ElementRef;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private themeService: ThemeService
+  ) {}
 
   ngOnInit(): void {
     this.initialColor = this.getRandomColor().hex;
     this.convert(this.initialColor);
+    this.appColorTheme$ = this.themeService.theme$;
   }
 
   /**
@@ -46,6 +53,10 @@ export class AppComponent implements OnInit {
 
   selectColor(color: string): void {
     this.selectedColor = color;
+  }
+
+  toggleTheme() {
+    this.themeService.toggleTheme();
   }
 
   private getRandomColor() {

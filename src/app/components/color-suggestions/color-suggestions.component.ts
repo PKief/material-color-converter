@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { listAnimation } from '../shared/animations/list-animation';
-import { ResultColor } from '../shared/models';
+import { listAnimation } from '@shared/animations';
+import { ResultColor } from '@shared/models';
 
 @Component({
   selector: 'app-color-suggestions',

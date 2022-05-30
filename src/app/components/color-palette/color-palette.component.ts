@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Color, materialColors } from '../colors';
-import { listAnimation } from '../shared/animations/list-animation';
+import { listAnimation } from '@shared/animations';
+import { Color, materialColors } from '../../colors';
 
 @Component({
   selector: 'app-color-palette',

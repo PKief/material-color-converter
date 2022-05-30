@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { OutputFormat } from '@shared/models';
 import * as chroma from 'chroma-js';
-import { OutputFormat } from '../shared/models';
 
 @Component({
   selector: 'app-color-input-output',
