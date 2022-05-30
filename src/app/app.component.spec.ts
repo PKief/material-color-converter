@@ -7,9 +7,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { materialColors } from './colors';
-import { GithubCornerComponent } from './shared/github-corner/github-corner.component';
-import { ToHslPipe } from './shared/pipes/to-hsl.pipe';
-import { ToRgbPipe } from './shared/pipes/to-rgb.pipe';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -26,7 +23,7 @@ describe('AppComponent', () => {
         MatInputModule,
         NoopAnimationsModule,
       ],
-      declarations: [AppComponent, ToHslPipe, ToRgbPipe, GithubCornerComponent],
+      declarations: [AppComponent],
       providers: [],
     }).compileComponents();
   });

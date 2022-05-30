@@ -5,12 +5,12 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { listAnimation } from '@shared/animations/list-animation';
+import { ResultColor } from '@shared/models';
 import { Observable } from 'rxjs';
 import { getSuggestions } from 'svg-color-linter';
 import { materialColors } from './colors';
 import { ThemeService } from './core/services/theme/theme.service';
-import { listAnimation } from './shared/animations/list-animation';
-import { ResultColor } from './shared/models';
 
 @Component({
   selector: 'app-root',
