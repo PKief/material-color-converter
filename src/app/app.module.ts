@@ -9,6 +9,11 @@ import { ColorInputOutputComponent } from './components/color-input-output/color
 import { ColorPaletteComponent } from './components/color-palette/color-palette.component';
 import { ColorSuggestionsComponent } from './components/color-suggestions/color-suggestions.component';
 
+const prefersReducedMotion = () => {
+  const match = window.matchMedia('(prefers-reduced-motion: reduce)');
+  return match.matches;
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +25,9 @@ import { ColorSuggestionsComponent } from './components/color-suggestions/color-
     SharedModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule.withConfig({
+      disableAnimations: prefersReducedMotion(),
+    }),
     FormsModule,
     ReactiveFormsModule,
   ],
