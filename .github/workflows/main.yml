@@ -31,7 +31,7 @@ jobs:
           wait-on: 'http://localhost:4200'
           wait-on-timeout: 300
       - name: Build ⚒️
-        run: npm run build -- --configuration production --base-href https://pkief.github.io/material-color-converter/
+        run: npm run build -- --configuration production --base-href https://pkief.com/material-color-converter/
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
