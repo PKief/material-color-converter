@@ -151,8 +151,7 @@
       }
     }
   },
-  "defaultProject": "material-color-converter",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "analytics": false
   }
 }

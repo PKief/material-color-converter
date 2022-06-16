@@ -23,7 +23,7 @@
           <mat-error
             id="invalid-color-error"
             *ngIf="
-              colorForm.get('colorInput')?.value.length > 0 &&
+              colorForm.get('colorInput')?.value &&
               colorForm.get('colorInput')?.hasError('validateCssColor')
             "
             >Color is invalid!</mat-error
@@ -63,11 +63,11 @@
             (click)="copiedToClipboard = true"
             [attr.aria-label]="'Copy to clipboard'"
             [attr.aria-pressed]="copiedToClipboard"
-            [cdkCopyToClipboard]="colorForm.get('colorOutput')?.value"
+            [cdkCopyToClipboard]="colorForm.get('colorOutput')?.value ?? ''"
             matTooltip="Copy to clipboard"
           >
             <mat-icon>{{
-              copiedToClipboard ? "check" : "content_paste"
+              copiedToClipboard ? 'check' : 'content_paste'
             }}</mat-icon>
           </button>
         </mat-form-field>

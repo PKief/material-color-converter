@@ -9,7 +9,10 @@ import * as chroma from 'chroma-js';
   styleUrls: ['./color-input-output.component.scss'],
 })
 export class ColorInputOutputComponent implements OnInit {
-  colorForm: FormGroup;
+  colorForm: FormGroup<{
+    colorInput: FormControl<string | null>;
+    colorOutput: FormControl<string | null>;
+  }>;
   copiedToClipboard = false;
   supportedOutputFormats: OutputFormat[] = [
     {
@@ -49,11 +52,11 @@ export class ColorInputOutputComponent implements OnInit {
 
   constructor() {
     this.colorForm = new FormGroup({
-      colorInput: new FormControl('', [
+      colorInput: new FormControl<string>('', [
         Validators.required,
         this.validateCssColor,
       ]),
-      colorOutput: new FormControl(''),
+      colorOutput: new FormControl<string>(''),
     });
   }
 
@@ -71,7 +74,7 @@ export class ColorInputOutputComponent implements OnInit {
   }
 
   triggerConvert(): void {
-    if (this.colorForm.valid) {
+    if (this.colorForm.valid && this.colorForm.value.colorInput) {
       this.convert.emit(this.colorForm.value.colorInput);
     }
   }
@@ -80,7 +83,7 @@ export class ColorInputOutputComponent implements OnInit {
    * Get color value of the form for the color picker
    */
   getColorFormValue(): string | undefined {
-    const color = this.colorForm.get('colorInput')?.value;
+    const color = this.colorForm.value.colorInput;
     if (color && chroma.valid(color)) {
       return chroma(color).hex();
     }
