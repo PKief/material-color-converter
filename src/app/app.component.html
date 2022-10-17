@@ -14,7 +14,7 @@
           ></app-color-input-output>
         </div>
       </div>
-      <div class="dark-mode-toggle-area">
+      <div id="dark-mode-toggle-area">
         <button
           mat-icon-button
           matTooltip="Toggle Dark Mode"
@@ -22,9 +22,9 @@
           (click)="toggleTheme()"
         >
           <mat-icon>{{
-            (appColorTheme$ | async) === "dark-theme"
-              ? "wb_sunny"
-              : "brightness_2"
+            (appColorTheme$ | async) === 'dark-theme'
+              ? 'wb_sunny'
+              : 'brightness_2'
           }}</mat-icon>
         </button>
       </div>
