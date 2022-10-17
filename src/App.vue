@@ -1,63 +1,39 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import FooterPart from "./components/FooterPart.vue";
+import HeaderPart from "./components/HeaderPart.vue";
+</script>
 
 <template>
-  <header>
-    <div class="app-header container">
-      <img src="assets/logo.png" alt="App Logo" class="app-logo" />
-      <h1 class="app-title">Material Color Converter</h1>
-    </div>
-    <div class="color-input-section pt-4">
-      <div class="container">
-        <input type="text" />
+  <HeaderPart />
+
+  <main class="pt-lg-5 pt-2">
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+        <div class="col-12 col-lg-8">
+          <div class="row">
+            <div class="col-lg-2 col-12">
+              <!-- <app-color-suggestions
+                [selectedColor]="selectedColor"
+                [suggestedColors]="suggestedColors"
+                (selectColor)="selectColor($event)"
+              ></app-color-suggestions> -->
+            </div>
+            <div class="col-lg-10 col-12 mt-lg-0 mt-4">
+              <!-- <app-color-palette
+                [selectedColor]="selectedColor"
+                (selectColor)="selectColor($event)"
+              ></app-color-palette> -->
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="dark-mode-toggle-area">
-      <button
-        mat-icon-button
-        matTooltip="Toggle Dark Mode"
-        aria-label="Button to toggle dark mode"
-      >
-        icon
-      </button>
-    </div>
-  </header>
+  </main>
+  <FooterPart />
 </template>
 
 <style lang="scss">
-.app {
-  background: red;
-}
-
-header {
-  background: red;
-
-  .dark-mode-toggle-area {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    mat-icon {
-      color: red;
-    }
-  }
-}
-
-.app-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  h1.app-title {
-    color: red;
-    font-weight: 300;
-    font-size: 24px;
-    letter-spacing: 0.5px;
-  }
-
-  img.app-logo {
-    width: 9rem;
-    padding: 2rem 0px;
-  }
-}
+@import "./assets/base.scss";
 
 .color-input-section {
   width: 100%;
@@ -65,7 +41,7 @@ header {
 
 .color-values {
   width: 100%;
-  border: 1px solid red;
+  border: 1px solid var(--color-text);
   padding: 2rem;
   border-radius: 5px;
   margin-top: 3rem;
@@ -75,22 +51,7 @@ header {
   }
 }
 
-main,
-footer {
-  background: red;
-}
-
-footer {
-  .footer-text {
-    p,
-    a {
-      color: red;
-      text-decoration: none;
-    }
-
-    img {
-      width: 2rem;
-    }
-  }
+main {
+  background: var(--color-background);
 }
 </style>
