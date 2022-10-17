@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import ColorInputOutput from "./ColorInputOutput.vue";
+</script>
+
 <template>
   <header>
     <div class="container">
@@ -6,7 +10,7 @@
         <h1 class="app-title">Material Color Converter</h1>
       </div>
       <div class="color-input-section pt-4">
-        <input type="text" />
+        <ColorInputOutput />
       </div>
     </div>
   </header>
