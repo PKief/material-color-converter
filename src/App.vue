@@ -9,7 +9,3 @@ import MainPart from "./components/MainPart.vue";
   <MainPart />
   <FooterPart />
 </template>
-
-<style lang="scss">
-@import "./assets/base.scss";
-</style>

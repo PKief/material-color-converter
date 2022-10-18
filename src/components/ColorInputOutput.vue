@@ -26,4 +26,16 @@ import CardItem from "./shared/CardItem.vue";
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.color-input {
+  mat-card {
+    box-shadow: 0px 11px 39px -13px #2632385c;
+  }
+}
+
+.color-form {
+  .color-form-field {
+    width: 100%;
+  }
+}
+</style>
