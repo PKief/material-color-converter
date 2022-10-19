@@ -1,39 +1,40 @@
 <script setup lang="ts">
 import { materialColors } from "@/colors";
 import type { ResultColor } from "@/models";
+import { useSelectedColorStore } from "@/stores/selectedColor";
+import { storeToRefs } from "pinia";
 import { getSuggestions } from "svg-color-linter";
-import { onMounted, reactive, ref } from "vue";
+import { ref } from "vue";
 import ColorPalette from "./ColorPalette.vue";
 import ColorSuggestions from "./ColorSuggestions.vue";
 
-let suggestedColors = reactive<ResultColor[]>([]);
-const selectedColor = ref<string | undefined>("");
-const initialColor = ref<string | undefined>("");
+const suggestedColors = ref<ResultColor[]>([]);
+const store = useSelectedColorStore();
+const { selectedColor } = storeToRefs(store);
+const { updateSelectedColor } = store;
 
 const selectColor = (color: string) => {
-  selectedColor.value = color;
-};
-
-const getRandomColor = () => {
-  return materialColors[Math.floor(Math.random() * materialColors.length)];
+  updateSelectedColor(color);
 };
 
 /**
  * Convert the given color to a color of the Material Design color palette
  */
 const convert = (color: string): void => {
-  suggestedColors = getSuggestions(
+  suggestedColors.value = getSuggestions(
     color,
     materialColors.map((c) => c.hex)
   );
 
-  selectedColor.value = suggestedColors[0].hex;
+  selectedColor.value = suggestedColors.value[0].hex;
 };
 
-onMounted(() => {
-  initialColor.value = getRandomColor().hex;
-  convert(initialColor.value);
+store.$onAction(() => {
+  convert(selectedColor.value);
 });
+
+// initial color convertion
+convert(selectedColor.value);
 </script>
 
 <template>

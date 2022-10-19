@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import CardItem from "./shared/CardItem.vue";
+
 </script>
 
 <template>

@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { onMounted, reactive } from "vue";
+import { onMounted, ref, toRefs } from "vue";
 import { materialColors } from "../colors";
 import type { Color } from "./../models";
 
-let colorPalette: Color[][] = reactive([]);
+const colorPalette = ref<Color[][]>([]);
+const props = defineProps<{ selectedColor: string | undefined }>();
+const { selectedColor } = toRefs(props);
 
-defineProps<{ selectedColor: string | undefined }>();
 defineEmits(["clickColor"]);
 
 /**
@@ -22,10 +23,13 @@ const generateColorPalette = (): void => {
   );
 
   // create two dimensional array for each category
-  colorPalette = Object.keys(colorMap).reduce<Color[][]>((result, key) => {
-    result.push(colorMap[key]);
-    return result;
-  }, []);
+  colorPalette.value = Object.keys(colorMap).reduce<Color[][]>(
+    (result, key) => {
+      result.push(colorMap[key]);
+      return result;
+    },
+    []
+  );
 };
 
 onMounted(() => {
