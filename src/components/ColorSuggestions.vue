@@ -53,7 +53,7 @@ ol#result-list {
 
     &:hover,
     &:focus {
-      background-color: var(--v-theme-primary);
+      background-color: rgb(var(--v-theme-primary));
     }
   }
 

@@ -67,10 +67,11 @@ onMounted(() => {
     height: 1.5rem;
     position: relative;
     cursor: pointer;
-    box-shadow: 0px 0px 0px 0.25px var(--v-theme-primary);
+    box-shadow: 0px 0px 0px 0.25px rgb(var(--v-theme-text));
 
     &.selected {
-      box-shadow: inset 0 0 0 2px white, 0px 0px 7px -1px var(--v-theme-primary);
+      box-shadow: inset 0 0 0 2px white,
+        0px 0px 7px -1px rgb(var(--v-theme-text));
       z-index: 100;
     }
   }
