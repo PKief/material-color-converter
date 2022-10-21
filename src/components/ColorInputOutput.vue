@@ -22,7 +22,7 @@ const isValidColor = (color: string) => {
   <v-container>
     <v-row justify="center">
       <v-col sm="12" md="8">
-        <v-card class="p-3 elevation-8">
+        <v-card class="p-3">
           <v-form
             class="color-form d-flex justify-content-between align-items-center gap-lg-4 flex-lg-row flex-column"
           >
@@ -56,6 +56,7 @@ const isValidColor = (color: string) => {
 <style lang="scss" scoped>
 .v-card {
   background: rgb(var(--v-theme-secondary));
+  box-shadow: 0 11px 39px -13px #2632385c;
 }
 
 .color-form {
