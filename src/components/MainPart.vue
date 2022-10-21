@@ -29,7 +29,7 @@ const convert = (color: string): void => {
   selectedColor.value = suggestedColors.value[0].hex;
 };
 
-store.$onAction(() => {
+store.$subscribe(() => {
   convert(selectedColor.value);
 });
 
