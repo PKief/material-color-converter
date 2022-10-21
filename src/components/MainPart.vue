@@ -29,8 +29,8 @@ const convert = (color: string): void => {
   selectedColor.value = suggestedColors.value[0].hex;
 };
 
-store.$onAction((state) => {
-  if (state.name === "updateInputColor") {
+store.$onAction((action) => {
+  if (action.name === "updateInputColor") {
     convert(inputColor.value);
   }
 });
