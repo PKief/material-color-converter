@@ -7,11 +7,16 @@ const getRandomColor = () => {
 };
 
 export const useSelectedColorStore = defineStore("selectedColor", () => {
-  const selectedColor = ref(getRandomColor().hex);
+  const selectedColor = ref("");
+  const inputColor = ref(getRandomColor().hex);
 
   const updateSelectedColor = (color: string) => {
     selectedColor.value = color;
   };
 
-  return { selectedColor, updateSelectedColor };
+  const updateInputColor = (color: string) => {
+    inputColor.value = color;
+  };
+
+  return { inputColor, selectedColor, updateInputColor, updateSelectedColor };
 });

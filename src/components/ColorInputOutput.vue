@@ -2,16 +2,14 @@
 import { useSelectedColorStore } from "@/stores/selectedColor";
 import { valid } from "chroma-js";
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
 
 const store = useSelectedColorStore();
 
-const outputColor = storeToRefs(store).selectedColor;
-const inputColor = ref(store.selectedColor);
+const { inputColor, selectedColor } = storeToRefs(store);
 
-const updateSelectedColor = () => {
+const updateInputColor = () => {
   if (isValidColor(inputColor.value)) {
-    store.updateSelectedColor(inputColor.value);
+    store.updateInputColor(inputColor.value);
   }
 };
 
@@ -32,7 +30,7 @@ const isValidColor = (color: string) => {
               v-model="inputColor"
               label="Arbitrary CSS Color"
               required
-              @keyup="updateSelectedColor()"
+              @keyup="updateInputColor()"
               hide-details="true"
             ></v-text-field>
 
@@ -43,7 +41,7 @@ const isValidColor = (color: string) => {
             <v-icon icon="mdi-arrow-down" class="d-lg-none mb-2" />
 
             <v-text-field
-              v-model="outputColor"
+              v-model="selectedColor"
               label="Material Design Color"
               required
               hide-details="true"

@@ -10,7 +10,7 @@ import ColorSuggestions from "./ColorSuggestions.vue";
 
 const suggestedColors = ref<ResultColor[]>([]);
 const store = useSelectedColorStore();
-const { selectedColor } = storeToRefs(store);
+const { inputColor, selectedColor } = storeToRefs(store);
 const { updateSelectedColor } = store;
 
 const selectColor = (color: string) => {
@@ -29,12 +29,14 @@ const convert = (color: string): void => {
   selectedColor.value = suggestedColors.value[0].hex;
 };
 
-store.$subscribe(() => {
-  convert(selectedColor.value);
+store.$onAction((state) => {
+  if (state.name === "updateInputColor") {
+    convert(inputColor.value);
+  }
 });
 
 // initial color convertion
-convert(selectedColor.value);
+convert(inputColor.value);
 </script>
 
 <template>
