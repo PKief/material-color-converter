@@ -9,7 +9,7 @@ const store = useSelectedColorStore();
 const outputColor = storeToRefs(store).selectedColor;
 const inputColor = ref(store.selectedColor);
 
-const triggerConvert = () => {
+const updateSelectedColor = () => {
   if (isValidColor(inputColor.value)) {
     store.updateSelectedColor(inputColor.value);
   }
@@ -24,16 +24,15 @@ const isValidColor = (color: string) => {
   <v-container>
     <v-row justify="center">
       <v-col sm="12" md="8">
-        <v-card class="p-3">
+        <v-card class="p-3 elevation-8">
           <v-form
             class="color-form d-flex justify-content-between align-items-center gap-lg-4 flex-lg-row flex-column"
           >
             <v-text-field
               v-model="inputColor"
-              variant="outlined"
               label="Arbitrary CSS Color"
               required
-              @keyup="triggerConvert()"
+              @keyup="updateSelectedColor()"
               hide-details="true"
             ></v-text-field>
 
@@ -45,7 +44,6 @@ const isValidColor = (color: string) => {
 
             <v-text-field
               v-model="outputColor"
-              variant="outlined"
               label="Material Design Color"
               required
               hide-details="true"
