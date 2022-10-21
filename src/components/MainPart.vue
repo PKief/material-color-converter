@@ -43,22 +43,28 @@ convert(inputColor.value);
   <main class="pt-lg-5 pt-2">
     <v-container>
       <v-row justify="center">
-        <v-col sm="12" md="8">
-          <v-row>
-            <v-col cols="12" sm="12" md="2">
-              <ColorSuggestions
-                :suggested-colors="suggestedColors"
-                :selected-color="selectedColor"
-                @click-color="selectColor"
-              />
-            </v-col>
-            <v-col cols="12" sm="12" md="10">
-              <ColorPalette
-                :selected-color="selectedColor"
-                @click-color="selectColor"
-              />
-            </v-col>
-          </v-row>
+        <v-col>
+          <v-container>
+            <v-row justify="center">
+              <v-col sm="12" md="8">
+                <v-row>
+                  <v-col cols="12" sm="12" md="2">
+                    <ColorSuggestions
+                      :suggested-colors="suggestedColors"
+                      :selected-color="selectedColor"
+                      @click-color="selectColor"
+                    />
+                  </v-col>
+                  <v-col cols="12" sm="12" md="10">
+                    <ColorPalette
+                      :selected-color="selectedColor"
+                      @click-color="selectColor"
+                    />
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-container>
         </v-col>
       </v-row>
     </v-container>
