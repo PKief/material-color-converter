@@ -1,8 +1,8 @@
 <template>
   <footer>
-    <div class="container">
-      <div class="row d-flex justify-content-center">
-        <div class="col-12 col-lg-8">
+    <v-container>
+      <v-row justify="center">
+        <v-col sm="12" lg="8">
           <div class="footer-text text-center my-5">
             <p>
               Created with ♡ by
@@ -20,21 +20,20 @@
               />
             </a>
           </div>
-        </div>
-      </div>
-    </div>
+        </v-col>
+      </v-row>
+    </v-container>
   </footer>
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/base.scss";
 footer {
-  background: var(--color-background);
+  background: var(--v-theme-primary);
 
   .footer-text {
     p,
     a {
-      color: var(--color-background-mute);
+      color: var(--v-theme-primary);
       text-decoration: none;
     }
 

@@ -9,8 +9,8 @@ export const getMediaPreference = (): ColorTheme => {
     "(prefers-color-scheme: dark)"
   ).matches;
   if (hasDarkPreference) {
-    return "dark-theme";
+    return "darkTheme";
   } else {
-    return "light-theme";
+    return "lightTheme";
   }
 };

@@ -1,1 +1,1 @@
-export type ColorTheme = "dark-theme" | "light-theme";
+export type ColorTheme = "darkTheme" | "lightTheme";

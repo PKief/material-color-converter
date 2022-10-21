@@ -4,26 +4,28 @@ import ColorInputOutput from "./ColorInputOutput.vue";
 
 <template>
   <header>
-    <div class="container">
-      <div class="app-header">
-        <img alt="Logo" class="app-logo" src="@/assets/img/logo.png" />
-        <h1 class="app-title">Material Color Converter</h1>
-      </div>
-      <div class="color-input-section pt-4">
-        <ColorInputOutput />
-      </div>
-    </div>
+    <v-container>
+      <v-row justify="center">
+        <v-col>
+          <div class="app-header">
+            <img alt="Logo" class="app-logo" src="@/assets/img/logo.png" />
+            <h1 class="app-title">Material Color Converter</h1>
+          </div>
+          <div class="color-input-section pt-4">
+            <ColorInputOutput />
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
   </header>
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/base.scss";
-
 header {
   background: linear-gradient(
     0deg,
-    var(--color-background) 15%,
-    var(--color-background-soft) 15%
+    rgb(var(--v-theme-primary)) 15%,
+    rgb(var(--v-theme-primary-darken-1)) 15%
   );
 }
 
@@ -33,7 +35,7 @@ header {
   align-items: center;
 
   h1.app-title {
-    color: var(--color-text);
+    color: rgb(var(--v-theme-text));
     font-weight: 300;
     font-size: 24px;
     letter-spacing: 0.5px;

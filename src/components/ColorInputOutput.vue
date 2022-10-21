@@ -6,8 +6,8 @@ import { ref } from "vue";
 
 const store = useSelectedColorStore();
 
-const inputColor = ref("");
 const outputColor = storeToRefs(store).selectedColor;
+const inputColor = ref(store.selectedColor);
 
 const triggerConvert = () => {
   if (isValidColor(inputColor.value)) {
@@ -21,35 +21,50 @@ const isValidColor = (color: string) => {
 </script>
 
 <template>
-  <div class="row d-flex justify-content-center py-3">
-    <div class="col-12 col-lg-8">
-      <v-card class="p-3" theme="dark">
-        <v-form>
-          <v-container>
-            <v-row>
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="inputColor"
-                  label="Arbitrary CSS Color"
-                  required
-                  theme="dark"
-                  @keyup="triggerConvert()"
-                ></v-text-field>
-              </v-col>
+  <v-container>
+    <v-row justify="center">
+      <v-col sm="12" md="8">
+        <v-card class="p-3">
+          <v-form
+            class="color-form d-flex justify-content-between align-items-center gap-lg-4 flex-lg-row flex-column"
+          >
+            <v-text-field
+              v-model="inputColor"
+              variant="outlined"
+              label="Arbitrary CSS Color"
+              required
+              @keyup="triggerConvert()"
+              hide-details="true"
+            ></v-text-field>
 
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="outputColor"
-                  label="Material Design Color"
-                  required
-                ></v-text-field>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-form>
-      </v-card>
-    </div>
-  </div>
+            <v-icon
+              icon="mdi-arrow-right"
+              class="d-none d-lg-block overflow-visible"
+            />
+            <v-icon icon="mdi-arrow-down" class="d-lg-none mb-2" />
+
+            <v-text-field
+              v-model="outputColor"
+              variant="outlined"
+              label="Material Design Color"
+              required
+              hide-details="true"
+            ></v-text-field>
+          </v-form>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.v-card {
+  background: rgb(var(--v-theme-secondary));
+}
+
+.color-form {
+  .v-input {
+    width: 100%;
+  }
+}
+</style>

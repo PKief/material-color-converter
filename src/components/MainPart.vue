@@ -39,34 +39,32 @@ convert(selectedColor.value);
 
 <template>
   <main class="pt-lg-5 pt-2">
-    <div class="container">
-      <div class="row d-flex justify-content-center">
-        <div class="col-12 col-lg-8">
-          <div class="row">
-            <div class="col-lg-2 col-12">
+    <v-container>
+      <v-row justify="center">
+        <v-col sm="12" md="8">
+          <v-row>
+            <v-col cols="12" sm="12" md="2">
               <ColorSuggestions
                 :suggested-colors="suggestedColors"
                 :selected-color="selectedColor"
                 @click-color="selectColor"
               />
-            </div>
-            <div class="col-lg-10 col-12 mt-lg-0 mt-4">
+            </v-col>
+            <v-col cols="12" sm="12" md="10">
               <ColorPalette
                 :selected-color="selectedColor"
                 @click-color="selectColor"
               />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-container>
   </main>
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/base.scss";
-
 main {
-  background: var(--color-background);
+  background: rgb(var(--v-theme-primary));
 }
 </style>

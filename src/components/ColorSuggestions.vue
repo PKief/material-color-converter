@@ -33,8 +33,6 @@ const { suggestedColors, selectedColor } = toRefs(props);
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/base.scss";
-
 ol#result-list {
   list-style: none;
   margin: 0;
@@ -55,7 +53,7 @@ ol#result-list {
 
     &:hover,
     &:focus {
-      background-color: var(--color-border-hover);
+      background-color: var(--v-theme-primary);
     }
   }
 

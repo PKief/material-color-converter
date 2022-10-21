@@ -54,8 +54,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/base.scss";
-
 #color-palette-wrapper {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
@@ -69,10 +67,10 @@ onMounted(() => {
     height: 1.5rem;
     position: relative;
     cursor: pointer;
-    box-shadow: 0px 0px 0px 0.25px var(--color-border);
+    box-shadow: 0px 0px 0px 0.25px var(--v-theme-primary);
 
     &.selected {
-      box-shadow: inset 0 0 0 2px white, 0px 0px 7px -1px var(--color-border);
+      box-shadow: inset 0 0 0 2px white, 0px 0px 7px -1px var(--v-theme-primary);
       z-index: 100;
     }
   }
