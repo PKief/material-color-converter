@@ -14,6 +14,7 @@ const { selectedColor } = storeToRefs(store);
 const { updateSelectedColor } = store;
 
 const selectColor = (color: string) => {
+  console.log(color)
   updateSelectedColor(color);
 };
 

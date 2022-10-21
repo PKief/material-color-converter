@@ -16,7 +16,7 @@ const { suggestedColors, selectedColor } = toRefs(props);
     <li
       class="result-item"
       v-for="(color, index) in suggestedColors"
-      @click="$emit('clickColor', color)"
+      @click="$emit('clickColor', color.hex)"
       tabindex="0"
       :key="index"
     >

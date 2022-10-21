@@ -1,42 +1,55 @@
 <script setup lang="ts">
-import CardItem from "./shared/CardItem.vue";
+import { useSelectedColorStore } from "@/stores/selectedColor";
+import { valid } from "chroma-js";
+import { storeToRefs } from "pinia";
+import { ref } from "vue";
 
+const store = useSelectedColorStore();
+
+const inputColor = ref("");
+const outputColor = storeToRefs(store).selectedColor;
+
+const triggerConvert = () => {
+  if (isValidColor(inputColor.value)) {
+    store.updateSelectedColor(inputColor.value);
+  }
+};
+
+const isValidColor = (color: string) => {
+  return valid(color);
+};
 </script>
 
 <template>
-  <div class="color-input row d-flex justify-content-center py-3">
+  <div class="row d-flex justify-content-center py-3">
     <div class="col-12 col-lg-8">
-      <CardItem class="p-3">
-        <form
-          class="color-form d-flex justify-content-between align-items-center gap-lg-4 align-items-lg-baseline flex-lg-row flex-column"
-        >
-          <div class="color-form-field">
-            <input id="color-input" />
+      <v-card class="p-3" theme="dark">
+        <v-form>
+          <v-container>
+            <v-row>
+              <v-col cols="12" md="6">
+                <v-text-field
+                  v-model="inputColor"
+                  label="Arbitrary CSS Color"
+                  required
+                  theme="dark"
+                  @keyup="triggerConvert()"
+                ></v-text-field>
+              </v-col>
 
-            <input type="color" />
-          </div>
-
-          <div class="color-form-field">
-            <input id="color-output" />
-            <button>sync</button>
-            <button></button>
-          </div>
-        </form>
-      </CardItem>
+              <v-col cols="12" md="6">
+                <v-text-field
+                  v-model="outputColor"
+                  label="Material Design Color"
+                  required
+                ></v-text-field>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-form>
+      </v-card>
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
-.color-input {
-  mat-card {
-    box-shadow: 0px 11px 39px -13px #2632385c;
-  }
-}
-
-.color-form {
-  .color-form-field {
-    width: 100%;
-  }
-}
-</style>
+<style lang="scss" scoped></style>
