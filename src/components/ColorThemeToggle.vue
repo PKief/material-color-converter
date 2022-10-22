@@ -34,8 +34,6 @@ store.updateColorTheme(currentTheme.value);
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/base.scss";
-
 #dark-mode-toggle-area {
   position: absolute;
   top: 1rem;

@@ -40,7 +40,7 @@ convert(inputColor.value);
 </script>
 
 <template>
-  <main class="pt-lg-5 pt-2">
+  <main class="pt-2">
     <v-container>
       <v-row justify="center">
         <v-col>

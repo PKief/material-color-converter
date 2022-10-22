@@ -3,7 +3,7 @@
     <v-container>
       <v-row justify="center">
         <v-col sm="12" lg="8">
-          <div class="footer-text text-center my-5">
+          <div class="footer-text text-center my-3">
             <p>
               Created with ♡ by
               <a href="https://pkief.github.io/">Philipp Kief</a>
@@ -28,13 +28,14 @@
 
 <style lang="scss" scoped>
 footer {
-  background: var(--v-theme-primary);
+  background: rgb(var(--v-theme-primary));
 
   .footer-text {
     p,
     a {
-      color: var(--v-theme-primary);
+      color: rgba(var(--v-theme-text), 0.25);
       text-decoration: none;
+      font-size: 14px;
     }
 
     img {
