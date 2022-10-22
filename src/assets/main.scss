@@ -1,0 +1,10 @@
+@import "./base.scss";
+@import "bootstrap/scss/bootstrap-utilities.scss";
+
+#app {
+  font-weight: normal;
+}
+
+.v-container {
+  max-width: 1320px !important;
+}
