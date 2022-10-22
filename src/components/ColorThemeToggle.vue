@@ -26,6 +26,9 @@ store.updateColorTheme(currentTheme.value);
     >
       <v-icon v-if="isDarkMode" icon="mdi-white-balance-sunny" />
       <v-icon v-else icon="mdi-moon-waning-crescent" />
+      <v-tooltip activator="parent" location="start" open-delay="500"
+        >Toggle color theme</v-tooltip
+      >
     </v-btn>
   </div>
 </template>
