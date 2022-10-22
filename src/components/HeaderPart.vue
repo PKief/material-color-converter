@@ -24,8 +24,8 @@ import ColorInputOutput from "./ColorInputOutput.vue";
 header {
   background: linear-gradient(
     0deg,
-    rgb(var(--v-theme-primary)) 15%,
-    rgb(var(--v-theme-primary-darken-1)) 15%
+    rgb(var(--v-theme-primary)) 17%,
+    rgb(var(--v-theme-primary-darken-1)) 17%
   );
 }
 

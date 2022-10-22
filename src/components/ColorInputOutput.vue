@@ -29,10 +29,16 @@ const isValidColor = (color: string) => {
             <v-text-field
               v-model="inputColor"
               label="Arbitrary CSS Color"
-              required
               @keyup="updateInputColor()"
               hide-details="true"
+              clearable
             ></v-text-field>
+
+            <input
+              v-model="inputColor"
+              type="color"
+              @change="updateInputColor()"
+            />
 
             <v-icon
               icon="mdi-arrow-right"
@@ -62,6 +68,12 @@ const isValidColor = (color: string) => {
 .color-form {
   .v-input {
     width: 100%;
+  }
+
+  input[type="color"] {
+    cursor: pointer;
+    height: 2rem;
+    width: 4rem;
   }
 }
 </style>

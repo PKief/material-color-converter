@@ -70,9 +70,3 @@ convert(inputColor.value);
     </v-container>
   </main>
 </template>
-
-<style lang="scss" scoped>
-main {
-  background: rgb(var(--v-theme-primary));
-}
-</style>

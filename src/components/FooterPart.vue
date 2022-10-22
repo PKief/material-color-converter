@@ -28,8 +28,6 @@
 
 <style lang="scss" scoped>
 footer {
-  background: rgb(var(--v-theme-primary));
-
   .footer-text {
     p,
     a {
