@@ -16,6 +16,10 @@ const updateInputColor = () => {
 const isValidColor = (color: string) => {
   return valid(color);
 };
+
+const copySelectedColor = async () => {
+  await navigator.clipboard.writeText(selectedColor.value);
+};
 </script>
 
 <template>
@@ -29,7 +33,7 @@ const isValidColor = (color: string) => {
             <v-text-field
               v-model="inputColor"
               label="Arbitrary CSS Color"
-              @keyup="updateInputColor()"
+              @keyup="updateInputColor"
               hide-details="true"
               clearable
             ></v-text-field>
@@ -37,7 +41,7 @@ const isValidColor = (color: string) => {
             <input
               v-model="inputColor"
               type="color"
-              @change="updateInputColor()"
+              @change="updateInputColor"
             />
 
             <v-icon
@@ -51,6 +55,8 @@ const isValidColor = (color: string) => {
               label="Material Design Color"
               required
               hide-details="true"
+              append-inner-icon="mdi-content-copy"
+              @click:append-inner="copySelectedColor"
             ></v-text-field>
           </v-form>
         </v-card>
