@@ -1,0 +1,32 @@
+name: Build and Deploy App
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
+      - name: Setup Node ${{ matrix.node-version }} ⚙
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install node_modules 📦
+        run: npm ci
+      - name: Run unit tests 🧪
+        run: npm run test:unit
+      - name: Build ⚒️
+        run: npm run build-only -- --base https://pkief.com/material-color-converter/
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          node-version: ${{ matrix.node-version }}
+          branch: gh-pages
+          folder: dist
