@@ -13,21 +13,22 @@ const { suggestedColors, selectedColor } = toRefs(props);
 
 <template>
   <ol id="result-list" class="flex-lg-column flex-row">
-    <li
-      class="result-item"
-      v-for="(color, index) in suggestedColors"
-      @click="$emit('clickColor', color.hex)"
-      tabindex="0"
-      :key="index"
-    >
-      <div class="ranking">
-        {{ index + 1 }}
-      </div>
-      <div
-        class="color-preview"
-        :class="{ selected: selectedColor === color.hex }"
-        :style="{ backgroundColor: color.hex }"
-      ></div>
+    <li v-for="(color, index) in suggestedColors" :key="index">
+      <button
+        v-ripple
+        class="result-item"
+        @click="$emit('clickColor', color.hex)"
+        tabindex="0"
+      >
+        <div class="ranking">
+          {{ index + 1 }}
+        </div>
+        <div
+          class="color-preview"
+          :class="{ selected: selectedColor === color.hex }"
+          :style="{ backgroundColor: color.hex }"
+        ></div>
+      </button>
     </li>
   </ol>
 </template>
@@ -41,11 +42,11 @@ ol#result-list {
   justify-content: space-between;
   height: 100%;
 
-  li.result-item {
+  button.result-item {
     align-items: center;
     display: grid;
     grid-row-gap: 22px;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 3fr;
     grid-column-gap: 10px;
     cursor: pointer;
     padding: 0.5rem;

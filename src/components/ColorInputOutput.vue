@@ -30,25 +30,27 @@ const copySelectedColor = async () => {
           <v-form
             class="color-form d-flex justify-content-between align-items-center gap-lg-4 flex-lg-row flex-column"
           >
-            <v-text-field
-              v-model="inputColor"
-              label="Arbitrary CSS Color"
-              @keyup="updateInputColor"
-              hide-details="true"
-              clearable
-            ></v-text-field>
+            <div class="color-input">
+              <v-text-field
+                v-model="inputColor"
+                label="Arbitrary CSS Color"
+                @keyup="updateInputColor"
+                hide-details="true"
+                clearable
+              ></v-text-field>
 
-            <input
-              v-model="inputColor"
-              type="color"
-              @change="updateInputColor"
-            />
+              <input
+                v-model="inputColor"
+                type="color"
+                @change="updateInputColor"
+              />
+            </div>
 
             <v-icon
               icon="mdi-arrow-right"
               class="d-none d-lg-block overflow-visible"
             />
-            <v-icon icon="mdi-arrow-down" class="d-lg-none mb-2" />
+            <v-icon icon="mdi-arrow-down" class="d-lg-none mb-2 mt-2" />
 
             <v-text-field
               v-model="selectedColor"
@@ -76,10 +78,17 @@ const copySelectedColor = async () => {
     width: 100%;
   }
 
+  .color-input {
+    display: grid;
+    grid-template-columns: 27fr 1fr;
+    align-items: center;
+    grid-gap: 1rem;
+  }
+
   input[type="color"] {
     cursor: pointer;
     height: 2rem;
-    width: 4rem;
+    width: 2rem;
   }
 }
 </style>
