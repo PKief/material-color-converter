@@ -20,8 +20,8 @@ jobs:
           cache: 'npm'
       - name: Install node_modules 📦
         run: npm ci
-      - name: Run unit tests 🧪
-        run: npm run test:unit
+      # - name: Run unit tests 🧪
+      #   run: npm run test:unit
       - name: Build ⚒️
         run: npm run build-only -- --base https://pkief.com/material-color-converter/
       - name: Deploy 🚀
