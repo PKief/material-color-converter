@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
 
     steps:
       - name: Checkout 🛎
@@ -19,22 +19,14 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - name: Install node_modules 📦
-        run: npm install
+        run: npm ci
       - name: Run unit tests 🧪
-        run: npm test -- --no-watch
-      - name: Run e2e tests (with cypress) 🖥
-        uses: cypress-io/github-action@v2
-        with:
-          browser: chrome
-          headless: true
-          start: npm start
-          wait-on: 'http://localhost:4200'
-          wait-on-timeout: 300
+        run: npm run test:unit
       - name: Build ⚒️
-        run: npm run build -- --configuration production --base-href https://pkief.com/material-color-converter/
+        run: npm run build-only -- --base https://pkief.com/material-color-converter/
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
           node-version: ${{ matrix.node-version }}
           branch: gh-pages
-          folder: dist/material-color-converter
+          folder: dist
