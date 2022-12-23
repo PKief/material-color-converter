@@ -10,7 +10,7 @@
 <h4 align="center">Convert any CSS color to a similar color of the Material Design.</h4>
 
 <p align="center">
-    <a href="https://github.com/PKief/material-color-converter/actions/workflows/main.yml"><img src="https://img.shields.io/github/workflow/status/pkief/material-color-converter/Build%20and%20Deploy%20App?style=for-the-badge&colorA=252526&colorB=43A047&label=Build" alt="Build"></a>
+    <a href="https://github.com/PKief/material-color-converter/actions/workflows/main.yml"><img src="https://img.shields.io/github/actions/workflow/status/pkief/material-color-converter/main.yml?style=for-the-badge&colorA=252526&colorB=43A047&label=Build" alt="Build"></a>
 </p>
 
 ## Description
