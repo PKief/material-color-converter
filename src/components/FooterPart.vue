@@ -53,15 +53,15 @@ footer {
     }
 
     a:hover {
-      color: black;
+      color: rgb(var(--v-theme-text));
     }
 
     .github-logo {
       width: 2rem;
-      fill: #9e9e9e;
+      fill: rgba(var(--v-theme-text), 0.25);
 
       &:hover {
-        fill: black;
+        fill: rgb(var(--v-theme-text));
       }
     }
   }
