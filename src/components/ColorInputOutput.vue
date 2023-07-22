@@ -35,7 +35,7 @@ const copySelectedColor = async () => {
                 v-model="inputColor"
                 label="Arbitrary CSS Color"
                 @keyup="updateInputColor"
-                v-hide-details="true"
+                hide-details="auto"
                 clearable
               ></v-text-field>
 
@@ -56,7 +56,7 @@ const copySelectedColor = async () => {
               v-model="selectedColor"
               label="Material Design Color"
               required
-              v-hide-details="true"
+              hide-details="auto"
               append-inner-icon="mdi-content-copy"
               @click:append-inner="copySelectedColor"
             ></v-text-field>
