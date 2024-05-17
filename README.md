@@ -2,7 +2,7 @@
   <br>
     <img src="https://raw.githubusercontent.com/PKief/material-color-converter/main/src/assets/img/logo.png" alt="logo" width="200">
   <br><br>
-  <a href="https://pkief.com/material-color-converter/">Material Color Converter</a>
+  <a href="https://pkief.github.io/material-color-converter/">Material Color Converter</a>
   <br>
   <br>
 </h1>
