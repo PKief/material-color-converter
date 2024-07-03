@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { materialColors } from "@/colors";
-import type { ResultColor } from "@/models";
-import { useSelectedColorStore } from "@/stores/selectedColor";
-import { storeToRefs } from "pinia";
-import { getSuggestions } from "svg-color-linter";
-import { ref } from "vue";
-import ColorPalette from "./ColorPalette.vue";
-import ColorSuggestions from "./ColorSuggestions.vue";
+import { materialColors } from '@/colors';
+import type { ResultColor } from '@/models';
+import { useSelectedColorStore } from '@/stores/selectedColor';
+import { storeToRefs } from 'pinia';
+import { getSuggestions } from 'svg-color-linter';
+import { ref } from 'vue';
+import ColorPalette from './ColorPalette.vue';
+import ColorSuggestions from './ColorSuggestions.vue';
 
 const suggestedColors = ref<ResultColor[]>([]);
 const store = useSelectedColorStore();
@@ -30,7 +30,7 @@ const convert = (color: string): void => {
 };
 
 store.$onAction((action) => {
-  if (action.name === "updateInputColor") {
+  if (action.name === 'updateInputColor') {
     convert(inputColor.value);
   }
 });

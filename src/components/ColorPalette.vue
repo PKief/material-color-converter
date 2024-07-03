@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { onMounted, ref, toRefs } from "vue";
-import { materialColors } from "../colors";
-import type { Color } from "./../models";
+import { onMounted, ref, toRefs } from 'vue';
+import { materialColors } from '../colors';
+import type { Color } from './../models';
 
 const colorPalette = ref<Color[][]>([]);
 const props = defineProps<{ selectedColor: string | undefined }>();
 const { selectedColor } = toRefs(props);
 
-defineEmits(["clickColor"]);
+defineEmits(['clickColor']);
 
 /**
  * Generate the color palette to show all colors of the Material Design Color Palette
@@ -56,7 +56,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 #color-palette-wrapper {
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
+  grid-template-columns: repeat(21, auto);
 
   @media screen and (max-width: 600px) {
     flex-wrap: wrap;

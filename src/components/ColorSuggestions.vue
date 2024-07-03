@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { toRefs } from "vue";
-import type { ResultColor } from "./../models";
+import { toRefs } from 'vue';
+import type { ResultColor } from './../models';
 
 const props = defineProps<{
   suggestedColors: ResultColor[];
   selectedColor: string | undefined;
 }>();
 
-defineEmits(["clickColor"]);
+defineEmits(['clickColor']);
 const { suggestedColors, selectedColor } = toRefs(props);
 </script>
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import ColorThemeToggle from "./components/ColorThemeToggle.vue";
-import FooterPart from "./components/FooterPart.vue";
-import HeaderPart from "./components/HeaderPart.vue";
-import MainPart from "./components/MainPart.vue";
+import ColorThemeToggle from './components/ColorThemeToggle.vue';
+import FooterPart from './components/FooterPart.vue';
+import HeaderPart from './components/HeaderPart.vue';
+import MainPart from './components/MainPart.vue';
 </script>
 
 <template>

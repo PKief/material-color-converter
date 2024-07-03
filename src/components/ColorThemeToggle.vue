@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { useColorThemeStore } from "@/stores/colorTheme";
-import { storeToRefs } from "pinia";
-import { computed } from "vue";
+import { useColorThemeStore } from '@/stores/colorTheme';
+import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
 
 const store = useColorThemeStore();
 const { currentTheme } = storeToRefs(store);
-const isDarkMode = computed(() => currentTheme.value === "darkTheme");
+const isDarkMode = computed(() => currentTheme.value === 'darkTheme');
 const toggleTheme = () => {
   if (isDarkMode.value) {
-    store.updateColorTheme("lightTheme");
+    store.updateColorTheme('lightTheme');
   } else {
-    store.updateColorTheme("darkTheme");
+    store.updateColorTheme('darkTheme');
   }
 };
 store.updateColorTheme(currentTheme.value);

@@ -1,4 +1,4 @@
-import type { ColorTheme } from "@/models";
+import type { ColorTheme } from '@/models';
 
 /**
  * Detect the prefered color theme by the user
@@ -6,11 +6,11 @@ import type { ColorTheme } from "@/models";
  */
 export const getMediaPreference = (): ColorTheme => {
   const hasDarkPreference = window.matchMedia(
-    "(prefers-color-scheme: dark)"
+    '(prefers-color-scheme: dark)'
   ).matches;
   if (hasDarkPreference) {
-    return "darkTheme";
+    return 'darkTheme';
   } else {
-    return "lightTheme";
+    return 'lightTheme';
   }
 };

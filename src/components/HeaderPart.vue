@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ColorInputOutput from "./ColorInputOutput.vue";
+import ColorInputOutput from './ColorInputOutput.vue';
 </script>
 
 <template>

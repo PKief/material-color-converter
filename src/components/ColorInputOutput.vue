@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useSelectedColorStore } from "@/stores/selectedColor";
-import { valid } from "chroma-js";
-import { storeToRefs } from "pinia";
+import { useSelectedColorStore } from '@/stores/selectedColor';
+import { valid } from 'chroma-js';
+import { storeToRefs } from 'pinia';
 
 const store = useSelectedColorStore();
 

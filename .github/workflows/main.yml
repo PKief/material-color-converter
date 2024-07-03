@@ -9,20 +9,22 @@ jobs:
 
     steps:
       - name: Checkout 🛎
-        uses: actions/checkout@v2
-      - name: Setup Node ⚙
-        uses: actions/setup-node@v4
+        uses: actions/checkout@v4
+
+      - name: Setup Platform 🛠
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: lts/*
-          cache: 'npm'
-      - name: Install node_modules 📦
-        run: npm ci
-      # - name: Run unit tests 🧪
-      #   run: npm run test:unit
+          bun-version: 1.1.17
+
+      - name: Install dependencies 📦
+        run: |
+          bun install --frozen-lockfile
+
       - name: Build ⚒️
-        run: npm run build-only -- --base https://pkief.github.io/material-color-converter/
+        run: bun run build-only -- --base https://pkief.github.io/material-color-converter/
+
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.5
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: dist
