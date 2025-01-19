@@ -9,10 +9,10 @@ jobs:
 
     steps:
       - name: 📥 Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: 🛠️ Setup Platform
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@4bc047ad259df6fc24a6c9b0f9a0cb08cf17fbe5 # v2
         with:
           bun-version-file: ".bun-version"
 
@@ -24,7 +24,7 @@ jobs:
         run: bun run build-only -- --base https://pkief.github.io/material-color-converter/
 
       - name: 🚀 Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@15de0f09300eea763baee31dff6c6184995c5f6a # v4
         with:
           branch: gh-pages
           folder: dist
