@@ -34,32 +34,38 @@ After the input of the color the converter compares the color with the Material 
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
+#### Bun.js
+
+This project requires Bun.js. It can be installed from here:
+
+- <https://bun.sh/>
+
 ### Project Setup
 
 ```sh
-npm install
+bun install
 ```
 
 #### Compile and Hot-Reload for Development
 
 ```sh
-npm run dev
+bun run dev
 ```
 
 #### Type-Check, Compile and Minify for Production
 
 ```sh
-npm run build
+bun run build
 ```
 
 #### Run Unit Tests with [Vitest](https://vitest.dev/)
 
 ```sh
-npm run test:unit
+bun run test:unit
 ```
 
 #### Lint with [ESLint](https://eslint.org/)
 
 ```sh
-npm run lint
+bun run lint
 ```
