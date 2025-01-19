@@ -2,6 +2,7 @@
   "recommendations": [
     "Vue.volar",
     "Vue.vscode-typescript-vue-plugin",
-    "biomejs.biome"
+    "biomejs.biome",
+    "esbenp.prettier-vscode"
   ]
 }
