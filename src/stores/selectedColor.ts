@@ -1,4 +1,5 @@
 import { materialColors } from '@/colors';
+import type { Color } from '@/models';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -7,15 +8,22 @@ const getRandomColor = () => {
 };
 
 export const useSelectedColorStore = defineStore('selectedColor', () => {
-  const selectedColor = ref('');
+  const selectedColor = ref<Color | undefined>(undefined);
   const inputColor = ref(getRandomColor().hex);
 
-  const updateSelectedColor = (color: string) => {
-    selectedColor.value = color;
+  const getColor = (hex: string) => {
+    return materialColors.find((color) => color.hex === hex);
   };
 
-  const updateInputColor = (color: string) => {
-    inputColor.value = color;
+  const updateSelectedColor = (hex: string) => {
+    const color = getColor(hex);
+    if (color) {
+      selectedColor.value = color;
+    }
+  };
+
+  const updateInputColor = (hex: string) => {
+    inputColor.value = hex;
   };
 
   return { inputColor, selectedColor, updateInputColor, updateSelectedColor };

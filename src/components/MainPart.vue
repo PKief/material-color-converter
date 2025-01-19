@@ -13,8 +13,8 @@ const store = useSelectedColorStore();
 const { inputColor, selectedColor } = storeToRefs(store);
 const { updateSelectedColor } = store;
 
-const selectColor = (color: string) => {
-  updateSelectedColor(color);
+const selectColor = (hex: string) => {
+  updateSelectedColor(hex);
 };
 
 /**
@@ -26,7 +26,7 @@ const convert = (color: string): void => {
     materialColors.map((c) => c.hex)
   );
 
-  selectedColor.value = suggestedColors.value[0].hex;
+  updateSelectedColor(suggestedColors.value[0]?.hex);
 };
 
 store.$onAction((action) => {
@@ -51,13 +51,13 @@ convert(inputColor.value);
                   <v-col cols="12" sm="12" md="2">
                     <ColorSuggestions
                       :suggested-colors="suggestedColors"
-                      :selected-color="selectedColor"
+                      :selected-color="selectedColor?.hex"
                       @click-color="selectColor"
                     />
                   </v-col>
                   <v-col cols="12" sm="12" md="10">
                     <ColorPalette
-                      :selected-color="selectedColor"
+                      :selected-color="selectedColor?.hex"
                       @click-color="selectColor"
                     />
                   </v-col>
