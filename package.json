@@ -15,7 +15,7 @@
     "@mdi/font": "7.4.47",
     "bootstrap": "^5.3.3",
     "chroma-js": "^3.1.2",
-    "pinia": "^2.3.0",
+    "pinia": "^3.0.0",
     "roboto-fontface": "^0.10.0",
     "svg-color-linter": "^3.0.0",
     "vue": "^3.5.13",
