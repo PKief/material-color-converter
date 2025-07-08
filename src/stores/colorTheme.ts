@@ -1,8 +1,8 @@
-import type { ColorTheme } from '@/models';
-import { getMediaPreference } from '@/themes';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { useTheme } from 'vuetify';
+import type { ColorTheme } from '@/models';
+import { getMediaPreference } from '@/themes';
 
 export const useColorThemeStore = defineStore('colorTheme', () => {
   const theme = useTheme();

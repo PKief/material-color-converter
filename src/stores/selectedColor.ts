@@ -1,7 +1,7 @@
-import { materialColors } from '@/colors';
-import type { Color } from '@/models';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import { materialColors } from '@/colors';
+import type { Color } from '@/models';
 
 const getRandomColor = () => {
   return materialColors[Math.floor(Math.random() * materialColors.length)];

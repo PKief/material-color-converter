@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useSelectedColorStore } from "@/stores/selectedColor";
 import chroma from "chroma-js";
 import { storeToRefs } from "pinia";
 import { computed, ref } from "vue";
+import { useSelectedColorStore } from "@/stores/selectedColor";
 
 const store = useSelectedColorStore();
 
@@ -55,9 +55,9 @@ const copySelectedColor = async () => {
   <v-container>
     <v-row justify="center">
       <v-col sm="12" md="8">
-        <v-card class="p-3">
+        <v-card class="pa-3">
           <v-form
-            class="color-form d-flex justify-content-between align-items-center gap-lg-4 flex-lg-row flex-column"
+            class="color-form d-flex justify-space-between align-center ga-lg-4 flex-lg-row flex-column"
           >
             <div class="color-input">
               <v-text-field

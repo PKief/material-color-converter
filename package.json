@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@mdi/font": "7.4.47",
-    "bootstrap": "^5.3.7",
     "chroma-js": "^3.1.2",
     "pinia": "^3.0.3",
     "roboto-fontface": "^0.10.0",
@@ -32,7 +31,6 @@
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
     "jsdom": "^26.1.0",
-    "npm-run-all2": "^8.0.4",
     "sass": "^1.89.2",
     "sass-loader": "^16.0.5",
     "typescript": "~5.8.3",

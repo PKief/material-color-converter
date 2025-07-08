@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { materialColors } from '@/colors';
-import type { ResultColor } from '@/models';
-import { useSelectedColorStore } from '@/stores/selectedColor';
-import { storeToRefs } from 'pinia';
-import { getSuggestions } from 'svg-color-linter';
-import { ref } from 'vue';
-import ColorPalette from './ColorPalette.vue';
-import ColorSuggestions from './ColorSuggestions.vue';
+import { storeToRefs } from "pinia";
+import { getSuggestions } from "svg-color-linter";
+import { ref } from "vue";
+import { materialColors } from "@/colors";
+import type { ResultColor } from "@/models";
+import { useSelectedColorStore } from "@/stores/selectedColor";
+import ColorPalette from "./ColorPalette.vue";
+import ColorSuggestions from "./ColorSuggestions.vue";
 
 const suggestedColors = ref<ResultColor[]>([]);
 const store = useSelectedColorStore();
@@ -30,7 +30,7 @@ const convert = (color: string): void => {
 };
 
 store.$onAction((action) => {
-  if (action.name === 'updateInputColor') {
+  if (action.name === "updateInputColor") {
     convert(inputColor.value);
   }
 });
@@ -43,28 +43,22 @@ convert(inputColor.value);
   <main class="pt-2">
     <v-container>
       <v-row justify="center">
-        <v-col>
-          <v-container>
-            <v-row justify="center">
-              <v-col sm="12" md="8">
-                <v-row>
-                  <v-col cols="12" sm="12" md="2">
-                    <ColorSuggestions
-                      :suggested-colors="suggestedColors"
-                      :selected-color="selectedColor?.hex"
-                      @click-color="selectColor"
-                    />
-                  </v-col>
-                  <v-col cols="12" sm="12" md="10">
-                    <ColorPalette
-                      :selected-color="selectedColor?.hex"
-                      @click-color="selectColor"
-                    />
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-row>
-          </v-container>
+        <v-col sm="12" md="8">
+          <v-row>
+            <v-col cols="12" sm="12" lg="2">
+              <ColorSuggestions
+                :suggested-colors="suggestedColors"
+                :selected-color="selectedColor?.hex"
+                @click-color="selectColor"
+              />
+            </v-col>
+            <v-col cols="12" sm="12" lg="10">
+              <ColorPalette
+                :selected-color="selectedColor?.hex"
+                @click-color="selectColor"
+              />
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
     </v-container>
