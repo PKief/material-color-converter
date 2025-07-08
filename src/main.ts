@@ -1,9 +1,22 @@
+/** biome-ignore-all lint/style/useNamingConvention: Imported components have PascalCase */
 import '@mdi/font/css/materialdesignicons.css';
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 import { createVuetify } from 'vuetify';
-import * as components from 'vuetify/components';
-import * as directives from 'vuetify/directives';
+import {
+  VApp,
+  VBtn,
+  VCard,
+  VCol,
+  VContainer,
+  VForm,
+  VIcon,
+  VRow,
+  VTextField,
+  VTooltip,
+} from 'vuetify/components';
+// Import only the directives we use
+import { Ripple } from 'vuetify/directives';
 import { aliases, mdi } from 'vuetify/iconsets/mdi';
 import 'vuetify/styles';
 import App from './App.vue';
@@ -17,8 +30,21 @@ const app = createApp(App);
 app.use(createPinia());
 
 const vuetify = createVuetify({
-  components,
-  directives,
+  components: {
+    VApp,
+    VBtn,
+    VCard,
+    VCol,
+    VContainer,
+    VForm,
+    VIcon,
+    VRow,
+    VTextField,
+    VTooltip,
+  },
+  directives: {
+    Ripple,
+  },
   theme: {
     defaultTheme: 'darkTheme',
     themes: { lightTheme, darkTheme },
