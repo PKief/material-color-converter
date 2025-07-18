@@ -19,11 +19,11 @@
     "svg-color-linter": "^3.0.0",
     "vue": "^3.5.17",
     "vue-router": "^4.5.1",
-    "vuetify": "^3.9.0",
+    "vuetify": "^3.9.2",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.1.1",
+    "@biomejs/biome": "^2.1.2",
     "@types/chroma-js": "^3.1.1",
     "@types/jsdom": "^21.1.7",
     "@types/webfontloader": "^1.6.38",
@@ -34,8 +34,8 @@
     "sass": "^1.89.2",
     "sass-loader": "^16.0.5",
     "typescript": "~5.8.3",
-    "vite": "^7.0.3",
+    "vite": "^7.0.5",
     "vitest": "^3.2.4",
-    "vue-tsc": "^3.0.1"
+    "vue-tsc": "^3.0.3"
   }
 }
