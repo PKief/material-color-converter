@@ -18,7 +18,7 @@
     "roboto-fontface": "^0.10.0",
     "svg-color-linter": "^3.0.0",
     "vue": "^3.5.17",
-    "vue-router": "^4.5.1",
+    "vue-router": "^5.0.0",
     "vuetify": "^3.9.2",
     "webfontloader": "^1.6.28"
   },
@@ -30,7 +30,7 @@
     "@vitejs/plugin-vue": "^6.0.0",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.8.0",
-    "jsdom": "^27.0.0",
+    "jsdom": "^28.0.0",
     "sass": "^1.89.2",
     "sass-loader": "^16.0.5",
     "typescript": "~5.9.0",
