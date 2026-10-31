@@ -1,0 +1,66 @@
+/* Page frame, toolbar, and footer. */
+.container {
+  width: min(100% - 2rem, 960px);
+  margin-inline: auto;
+
+  @media (max-width: 540px) {
+    width: calc(100% - 1.5rem);
+  }
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-block: 0.75rem;
+
+  @media (max-width: 540px) {
+    padding-block: 0.5rem;
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+
+  & img {
+    flex: 0 0 28px;
+  }
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1.4rem;
+
+  &:hover {
+    background: var(--surface);
+  }
+}
+
+footer {
+  padding-block: 0.25rem 1rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+
+  & p {
+    margin: 0;
+  }
+}

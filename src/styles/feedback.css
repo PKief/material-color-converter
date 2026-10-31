@@ -1,0 +1,33 @@
+/* Live messages and non-blocking clipboard feedback. */
+.status {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+
+  &:not(:empty) {
+    margin-block: 0.5rem;
+  }
+}
+
+.toast {
+  position: fixed;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: max-content;
+  max-width: calc(100% - 2rem);
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  background: var(--text);
+  color: var(--surface);
+  box-shadow: 0 4px 16px #0002;
+  font-size: 0.8rem;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+
+  &.is-visible {
+    opacity: 1;
+  }
+}

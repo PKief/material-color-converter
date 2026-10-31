@@ -1,0 +1,54 @@
+/* Element defaults and shared accessibility styles. */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+}
+
+button, input, select {
+  font: inherit;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+}
+
+button {
+  cursor: pointer;
+  color: var(--text);
+  background: var(--surface);
+  padding: 0.5rem 0.65rem;
+
+  &:hover {
+    filter: brightness(0.92);
+  }
+}
+
+:focus-visible {
+  outline: 3px solid #2196f3;
+  outline-offset: 3px;
+}
+
+a {
+  color: inherit;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+h2 {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+section {
+  margin-bottom: 1rem;
+}

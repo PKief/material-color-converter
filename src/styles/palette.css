@@ -1,0 +1,79 @@
+/* Closest matches and the full seamless palette. */
+.suggestions {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.5rem;
+
+  @media (max-width: 540px) {
+    gap: 0.35rem;
+  }
+}
+
+.suggestion {
+  position: relative;
+  height: 48px;
+  padding: 0.4rem;
+  border: 0;
+
+  &[aria-pressed="true"] {
+    box-shadow: inset 0 0 0 2px white, inset 0 0 0 4px black;
+  }
+}
+
+.rank {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.palette-scroll {
+  overflow-x: auto;
+  padding: 4px;
+  margin: -4px;
+}
+
+.palette {
+  display: grid;
+  grid-template-columns: repeat(21, minmax(0, 1fr));
+  min-width: 504px;
+  gap: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.palette-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.palette-swatch {
+  appearance: none;
+  display: block;
+  flex: 0 0 24px;
+  width: 100%;
+  height: 24px;
+  margin: 0;
+  border-radius: 0;
+  border: 0;
+  padding: 0;
+  box-shadow: none;
+  position: relative;
+
+  /* Hover emphasis must not change the actual swatch color. */
+  &:hover {
+    filter: none;
+    box-shadow: inset 0 0 0 1px currentColor;
+    z-index: 1;
+  }
+
+  &[aria-pressed="true"] {
+    box-shadow: inset 0 0 0 2px white, inset 0 0 0 4px black;
+    z-index: 1;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 2px white, inset 0 0 0 4px black;
+    z-index: 2;
+  }
+}

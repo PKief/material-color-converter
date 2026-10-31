@@ -8,7 +8,7 @@ Native HTML and CSS, with small JavaScript files for conversion and interactions
 
 Open **`index.html`** in your browser. That's it.
 
-The page uses ordered, deferred classic scripts so it works directly over `file://`. Browser code shares one `MaterialConverter` namespace; implementation details are scoped locally. `package.json` retains `"type": "module"` for any future Node tooling.
+The page uses ordered, deferred classic scripts so it works directly over `file://`. Browser code shares one `MaterialConverter` namespace; implementation details are scoped locally.
 
 ## Features
 
