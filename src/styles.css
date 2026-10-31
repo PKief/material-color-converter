@@ -1,0 +1,146 @@
+/* Theme tokens */
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color-scheme: light;
+  --background: #fafafa;
+  --surface: #fff;
+  --text: #212121;
+  --muted: #616161;
+  --border: #d0d0d0;
+  --error: #b00020;
+
+  @media (prefers-color-scheme: dark) {
+    &:not([data-theme="light"]) {
+      color-scheme: dark;
+      --background: #121212;
+      --surface: #202020;
+      --text: #eee;
+      --muted: #bdbdbd;
+      --border: #626262;
+      --error: #ffb4ab;
+    }
+  }
+
+  &[data-theme="dark"] {
+    color-scheme: dark;
+    --background: #121212;
+    --surface: #202020;
+    --text: #eee;
+    --muted: #bdbdbd;
+    --border: #626262;
+    --error: #ffb4ab;
+  }
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--background); color: var(--text); }
+button, input, select { font: inherit; }
+button, input, select { border: 1px solid var(--border); border-radius: 5px; }
+button { cursor: pointer; color: var(--text); background: var(--surface); padding: 0.5rem 0.65rem; }
+button:hover { filter: brightness(0.92); }
+:focus-visible { outline: 3px solid #2196f3; outline-offset: 3px; }
+a { color: inherit; }
+.container { width: min(100% - 2rem, 960px); margin-inline: auto; }
+
+/* A utility toolbar, not a hero section. */
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding-block: 0.75rem; }
+.brand { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
+.brand img { flex: 0 0 28px; }
+h1 { margin: 0; font-size: clamp(0.9rem, 2.5vw, 1.1rem); font-weight: 600; line-height: 1.3; }
+.toolbar-actions { display: flex; gap: 0.25rem; flex-shrink: 0; }
+.icon-button { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; border: 0; background: transparent; border-radius: 5px; text-decoration: none; font-size: 1.4rem; }
+.icon-button:hover { background: var(--surface); }
+
+/* Keep both controls inline until they genuinely need more room. */
+.converter { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 1rem; padding: 1rem; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); margin-bottom: 1rem; }
+.input-group, .output-group { min-width: 0; }
+label { display: block; margin-bottom: 0.35rem; font-size: 0.8rem; font-weight: 500; color: var(--muted); }
+.input-row { display: flex; align-items: center; gap: 0.4rem; }
+.input-row button, .input-row select { flex-shrink: 0; min-height: 40px; font-size: 0.8rem; }
+.input-row select { padding: 0.4rem; color: var(--text); background: var(--surface); cursor: pointer; }
+.output-preview { flex: 0 0 12px; width: 12px; height: 12px; border-radius: 50%; box-shadow: 0 0 0 1px var(--border); }
+input[type="text"] { width: 100%; min-width: 0; height: 40px; padding: 0.5rem 0.6rem; color: var(--text); background: var(--surface); font-size: 0.9rem; }
+#color-output { font-family: ui-monospace, monospace; }
+input[type="color"] { flex: 0 0 40px; width: 40px; height: 40px; padding: 2px; background: var(--surface); cursor: pointer; }
+/* Distinguish controls from the converter surface in either theme. */
+.converter input,
+.converter select {
+  background: color-mix(in srgb, var(--surface), var(--text) 6%);
+  border-color: color-mix(in srgb, var(--surface), var(--text) 50%);
+}
+.converter input::placeholder { color: var(--muted); opacity: 1; }
+.error { margin: 0; color: var(--error); font-size: 0.8rem; }
+.error:not(:empty) { margin-top: 0.4rem; }
+.converter [aria-invalid="true"] { border-color: var(--error); }
+
+/* Compact results; the colors carry the visual weight. */
+section { margin-bottom: 1rem; }
+h2 { margin: 0 0 0.5rem; font-size: 0.8rem; font-weight: 500; color: var(--muted); }
+.suggestions { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.5rem; }
+.suggestion { position: relative; height: 48px; padding: 0.4rem; border: 0; }
+.rank { font-size: 0.85rem; font-weight: 600; }
+.suggestion[aria-pressed="true"] { box-shadow: inset 0 0 0 2px white, inset 0 0 0 4px black; }
+
+/* Seamless swatches with touch-sized columns, scrollable on narrow screens. */
+.palette-scroll { overflow-x: auto; padding: 4px; margin: -4px; }
+.palette { display: grid; grid-template-columns: repeat(21, minmax(0, 1fr)); min-width: 504px; gap: 0; border-radius: 8px; overflow: hidden; }
+.palette-column { display: flex; flex-direction: column; gap: 0; }
+.palette-swatch {
+  appearance: none;
+  display: block;
+  flex: 0 0 24px;
+  width: 100%;
+  height: 24px;
+  margin: 0;
+  border-radius: 0;
+  border: 0;
+  padding: 0;
+  box-shadow: none;
+  position: relative;
+
+  /* Emphasize interaction without changing the swatch's actual color. */
+  &:hover { filter: none; box-shadow: inset 0 0 0 1px currentColor; z-index: 1; }
+
+  &[aria-pressed="true"] {
+    box-shadow: inset 0 0 0 2px white, inset 0 0 0 4px black;
+    z-index: 1;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 2px white, inset 0 0 0 4px black;
+    z-index: 2;
+  }
+}
+
+/* Live regions remain available without reserving empty space. */
+.status { margin: 0; color: var(--muted); font-size: 0.8rem; }
+.status:not(:empty) { margin-block: 0.5rem; }
+.toast {
+  position: fixed;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: max-content;
+  max-width: calc(100% - 2rem);
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  background: var(--text);
+  color: var(--surface);
+  box-shadow: 0 4px 16px #0002;
+  font-size: 0.8rem;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+}
+.toast.is-visible { opacity: 1; }
+footer { padding-block: 0.25rem 1rem; font-size: 0.75rem; color: var(--muted); }
+footer p { margin: 0; }
+
+@media (max-width: 540px) {
+  .container { width: calc(100% - 1.5rem); }
+  .toolbar { padding-block: 0.5rem; }
+  .converter { grid-template-columns: minmax(0, 1fr); gap: 0.65rem; padding: 0.75rem; }
+  .suggestions { gap: 0.35rem; }
+}

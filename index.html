@@ -1,13 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Material Color Converter</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Find the closest Material Design colors to any HEX, RGB, HSL, or named color.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="./public/favicon.ico">
+  <link rel="stylesheet" href="./src/styles.css">
+  <title>Material Color Converter</title>
+  <script defer src="./src/colors.js"></script>
+  <script defer src="./src/color-utils.js"></script>
+  <script defer src="./src/app.js"></script>
+</head>
+<body>
+  <header class="container toolbar">
+    <div class="brand">
+      <img src="./public/logo.png" width="28" height="28" alt="">
+      <h1>Material Color Converter</h1>
+    </div>
+    <nav class="toolbar-actions" aria-label="App controls">
+      <button id="theme-toggle" class="icon-button" type="button" aria-label="Toggle dark mode" title="Toggle color theme">◐</button>
+      <a class="icon-button" href="https://github.com/PKief/material-color-converter" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" title="GitHub repository"><img src="./public/github.svg" alt="" width="20" height="20"></a>
+    </nav>
+  </header>
+  <main class="container">
+    <form id="color-form" class="converter" novalidate>
+      <div class="input-group">
+        <label for="color-input">Your color</label>
+        <div class="input-row">
+          <input id="color-input" type="text" value="#FF9800" placeholder="HEX, RGB, HSL or color name" autocomplete="off" spellcheck="false" aria-describedby="input-error">
+          <input id="color-picker" type="color" value="#ff9800" aria-label="Choose your color">
+        </div>
+        <p id="input-error" class="error" aria-live="polite"></p>
+      </div>
+      <div class="output-group">
+        <label for="color-output">Material Design color</label>
+        <div class="input-row">
+          <span id="output-preview" class="output-preview" aria-hidden="true"></span>
+          <input id="color-output" type="text" readonly>
+          <select id="output-mode" aria-label="Output format">
+            <option value="hex">HEX</option>
+            <option value="name">Name</option>
+            <option value="rgb">RGB</option>
+          </select>
+          <button id="copy-output" type="button" title="Copy color">Copy</button>
+        </div>
+      </div>
+    </form>
+    <section aria-labelledby="suggestions-title">
+      <h2 id="suggestions-title">Closest matches</h2>
+      <div id="suggestions" class="suggestions"></div>
+    </section>
+    <section aria-labelledby="palette-title">
+      <h2 id="palette-title">Material Design palette</h2>
+      <div class="palette-scroll" tabindex="0" role="region" aria-label="Scrollable Material Design color palette">
+        <div id="palette" class="palette"></div>
+      </div>
+    </section>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+    <noscript>This converter needs JavaScript enabled to calculate color matches.</noscript>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  <footer class="container">
+    <p>Created with ♡ by <a href="https://pkief.github.io/" target="_blank" rel="noopener noreferrer">Philipp Kief</a></p>
+  </footer>
+</body>
 </html>

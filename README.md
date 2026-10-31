@@ -1,71 +1,35 @@
-<h1 align="center">
-  <br>
-    <img src="https://raw.githubusercontent.com/PKief/material-color-converter/main/src/assets/img/logo.png" alt="logo" width="200">
-  <br><br>
-  <a href="https://pkief.github.io/material-color-converter/">Material Color Converter</a>
-  <br>
-  <br>
-</h1>
+# Material Color Converter
 
-<h4 align="center">Convert any CSS color to a similar color of the Material Design.</h4>
+[Open the app](https://pkief.github.io/material-color-converter/)
 
-<p align="center">
-    <a href="https://github.com/PKief/material-color-converter/actions/workflows/main.yml"><img src="https://img.shields.io/github/actions/workflow/status/pkief/material-color-converter/main.yml?style=for-the-badge&colorA=252526&colorB=43A047&label=Build" alt="Build"></a>
-</p>
+Native HTML and CSS, with small JavaScript files for conversion and interactions. **Zero dependencies, no installation, no build, no server required.**
 
-## Description
+## Run
 
-This web application was created to make it easier to pick the most similar color of the [Material Design color system](https://m2.material.io/design/color/the-color-system.html#tools-for-picking-colors). This is especially useful if one knows a color tone already, but wants to convert it to match the material design. The colors of the material design are all coordinated, so that they offer suitable contrasts and complement each other very well.
+Open **`index.html`** in your browser. That's it.
 
-The Material Color Converter supports the input of all data types of the [CSS color definitions](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value):
+The page uses ordered, deferred classic scripts so it works directly over `file://`. Browser code shares one `MaterialConverter` namespace; implementation details are scoped locally. `package.json` retains `"type": "module"` for any future Node tooling.
 
-| Data type | Example         |
-| --------- | --------------- |
-| Keyword   | red             |
-| HEX       | #ff0000         |
-| RGB       | rgb(255,0,0)    |
-| HSL       | hsl(0,50%,100%) |
+## Features
 
-After the input of the color the converter compares the color with the Material Design color palette and suggests five colors which are close to the input color. Each of these suggested colors can be selected by clicking on it to highlight the color in the color palette. This allows the user to see where the suggested color is located. In the color palette each color can be selected so that one can find out the respective HEX values.
+- HEX, RGB, HSL, and browser-supported CSS color names/syntax, plus a native color picker.
+- Five closest Material Design matches and the full clickable palette.
+- HEX/name/RGB output and clipboard copying.
+- System-aware light/dark theme with an optional saved preference.
+- Responsive layout, keyboard-accessible buttons, and validation.
 
-## Development
+Clipboard and theme storage availability depend on the browser, especially for local files. If clipboard access is blocked, the app selects the output for manual copying. Theme switching still works when storage is disabled.
 
-### Recommended IDE Setup
+## Color matching
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+A compact algorithm compares perceived color differences to the palette. Palette coordinates are calculated once. Results may differ from the previous implementation.
 
-#### Bun.js
+The browser's canvas parses CSS colors into sRGB; HEX is parsed directly. Transparent colors are composited over white independently of the selected theme. Context-dependent values such as `currentColor` and `var()` are rejected.
 
-This project requires Bun.js. It can be installed from here:
+## Deploy (optional)
 
-- <https://bun.sh/>
+Host `index.html`, `src/`, and `public/` at the same relative paths using any static host. No compilation or base-path configuration is required.
 
-### Project Setup
+GitHub Actions uploads the project directly to GitHub Pages on pushes to `main`. Configure the repository's **Pages source to GitHub Actions**. Node is not required to run or deploy the app.
 
-```sh
-bun install
-```
-
-#### Compile and Hot-Reload for Development
-
-```sh
-bun run dev
-```
-
-#### Type-Check, Compile and Minify for Production
-
-```sh
-bun run build
-```
-
-#### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-bun run test:unit
-```
-
-#### Lint with [ESLint](https://eslint.org/)
-
-```sh
-bun run lint
-```
+Created with ♡ by [Philipp Kief](https://pkief.github.io/).

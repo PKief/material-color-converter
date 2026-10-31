@@ -1,6 +1,5 @@
-import type { Color } from './models';
-
-export const materialColors: Color[] = [
+globalThis.MaterialConverter = {
+  materialColors: [
   { category: 'red', hue: '50', hex: '#FFEBEE' },
   { category: 'red', hue: '100', hex: '#FFCDD2' },
   { category: 'red', hue: '200', hex: '#EF9A9A' },
@@ -276,4 +275,5 @@ export const materialColors: Color[] = [
 
   { category: 'black', hex: '#000000' },
   { category: 'white', hex: '#FFFFFF' },
-];
+  ],
+};
